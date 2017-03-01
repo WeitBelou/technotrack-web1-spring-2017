@@ -70,16 +70,16 @@ WSGI_APPLICATION = 'application.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'WEB_TECHNOTRACK_DB',
-        'USER': 'ivan',
-        'PASSWORD': 'password',
+        'USER': 'admin',
+        'PASSWORD': 'Jr6tGsOjTC',
         'HOST': 'localhost',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
