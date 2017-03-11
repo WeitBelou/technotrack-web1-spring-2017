@@ -11,6 +11,11 @@ class Blog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Блог'
+        verbose_name_plural = 'Блоги'
+        ordering = ('-created_at',)
+
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -21,3 +26,8 @@ class Post(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
+        ordering = ('-created_at',)
