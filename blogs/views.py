@@ -1,7 +1,7 @@
 from django.views.generic import DetailView
 from django.views.generic import ListView
 
-from blogs.models import Blog
+from blogs.models import Blog, Post
 
 
 class BlogList(ListView):
@@ -12,3 +12,7 @@ class BlogList(ListView):
 class BlogDetails(DetailView):
     template_name = 'blogs/blog_details.html'
     model = Blog
+
+class PostDetails(DetailView):
+    template_name = 'blogs/post_details.html'
+    model = Post
