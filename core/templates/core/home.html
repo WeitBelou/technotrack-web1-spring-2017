@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Домашняя страница.
+{% endblock %}
+
+{% block page_title %}
+Домашняя страница.
+{% endblock %}
+
+{% block content %}
+<div>Число пользователей: {{ n_users }}</div>
+<div>Число блогов: {{ n_blogs }}</div>
+<div>Число постов: {{ n_posts }}</div>
+<div>Число комментариев: {{ n_comments }}</div>
+{% endblock %}
