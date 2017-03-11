@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Список блогов.{% endblock %}
+{% block content %}
+    {% for blog in blog_list %}
+        <div style="border: dashed; margin: 1em">
+            <div><h3>{{ blog.title }}</h3></div>
+            <div>{{ blog.description }}</div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
