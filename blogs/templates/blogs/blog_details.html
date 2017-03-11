@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Блог "{{ object.title }}".
+{% endblock %}
+
+{% block page_title %}
+    Блог "{{ object.title }}".
+{% endblock %}
+
+{% block content %}
+    <div>{{ object.description }}</div>
+    {% for post in object.post_set.all %}
+        <div>
+            <div>
+                {{ forloop.counter }}: {{ post.title }}.
+            </div>
+            <div>
+                <small>Автор: {{ post.author }}</small>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
