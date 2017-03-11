@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'application.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'WEB_TECHNOTRACK_DB',
+        'NAME': 'web_technotrack_db',
         'USER': 'admin',
         'PASSWORD': 'Jr6tGsOjTC',
         'HOST': 'localhost',
