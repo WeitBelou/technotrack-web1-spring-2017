@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
+    rating = models.IntegerField(verbose_name='Рейтинг', default=0)
 
     class Meta:
         verbose_name = 'Пользователь'
