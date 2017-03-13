@@ -11,7 +11,7 @@
 {% block content %}
     <h3><a href="{% url 'blogs:blog_list' %}">Список блогов</a></h3>
     <div>{{ object.description }}</div>
-    {% for post in object.post_set.all %}
+    {% for post in object.posts.all %}
         <div style="border: dashed">
             <div>{{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.</div>
             <div><small>Автор: {{ post.author }}</small></div>
