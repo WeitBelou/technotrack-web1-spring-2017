@@ -11,6 +11,9 @@ class Blog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return 'Блог #{id}: {title}'.format(id=self.id, title=self.title)
+
     class Meta:
         verbose_name = 'Блог'
         verbose_name_plural = 'Блоги'
@@ -26,6 +29,9 @@ class Post(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'Пост #{id}: {title}'.format(id=self.id, title=self.title)
 
     class Meta:
         verbose_name = 'Пост'
