@@ -4,10 +4,10 @@ from django.db import models
 
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    post = models.ForeignKey('blogs.Post')
+    post = models.ForeignKey('blogs.Post', related_name='comments')
 
-    title = models.CharField(max_length=30)
-    text = models.TextField(max_length=300)
+    title = models.CharField(max_length=255)
+    text = models.TextField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -18,4 +18,4 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
-        ordering = ('-created_at',)
+        ordering = ('created_at',)
