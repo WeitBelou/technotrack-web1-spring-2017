@@ -11,6 +11,8 @@
 {% block content %}
     <a href="{% url 'blogs:blog_details' object.blog_id %}"><h3>Блог</h3></a>
     <div>{{ object.content }}</div>
+    <hr>
+    <div>Лайков: {{ object.likes.count }}</div>
     <div>
         {% include "comments/comments_list.html" with object_list=object.comments.all %}
     </div>

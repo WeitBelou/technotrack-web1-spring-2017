@@ -55,3 +55,19 @@ class Post(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ('-created_at',)
+
+
+class Like(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='likes')
+    post = models.ForeignKey(Post, related_name='likes')
+
+    def __str__(self):
+        return 'Лайк #{id}: от "{author}" к посту "{post}"'.format(id=self.id, author=self.author, post=self.post)
+
+    class Meta:
+        verbose_name = 'Лайк'
+        verbose_name_plural = 'Лайки'
+        ordering = ('-created_at',)
