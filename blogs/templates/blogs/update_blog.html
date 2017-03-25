@@ -1,5 +1,13 @@
 {% extends 'core/base.html' %}
 
+{% block title %}
+    Редактирование блога.
+{% endblock %}
+
+{% block page_title %}
+    Редактирование блога.
+{% endblock %}
+
 {% block content %}
     <form method="post" action="{% url 'blogs:update_blog'  pk=object.pk %}">
         {% csrf_token %}
