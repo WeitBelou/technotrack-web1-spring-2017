@@ -16,7 +16,17 @@
 </div>
 
 <div>
-    {% block footer %}<hr/>{% endblock %}
+    {% block footer %}
+        <hr/>
+        {% if user.is_authenticated %}
+            <div>
+                Привет, {{ user.username }}.
+            </div>
+            <a href="{% url 'core:logout' %}">Выйти</a>
+        {% else %}
+            <a href="{% url 'core:login' %}">Войти</a>
+        {% endif %}
+    {% endblock %}
 </div>
 
 </body>

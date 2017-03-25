@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}
+    Вход на сайт.
+{% endblock %}
+
+{% block title %}
+    Вход на сайт.
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'core:login' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Войти">
+    </form>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
