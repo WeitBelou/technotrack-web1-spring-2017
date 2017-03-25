@@ -9,7 +9,9 @@
         <div style="border: dashed; margin: 1em">
             <div><a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a></div>
             <div>{{ blog.description }}</div>
-            <div><small>Владелец: {{ blog.owner }}</small></div>
+            <div>
+                <small>Владелец: {{ blog.owner }}</small>
+            </div>
         </div>
     {% endfor %}
 

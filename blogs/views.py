@@ -13,6 +13,7 @@ class BlogDetails(DetailView):
     template_name = 'blogs/blog_details.html'
     model = Blog
 
+
 class PostDetails(DetailView):
     template_name = 'blogs/post_details.html'
     model = Post

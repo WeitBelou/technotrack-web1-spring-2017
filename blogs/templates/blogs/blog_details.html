@@ -14,7 +14,9 @@
     {% for post in object.posts.all %}
         <div style="border: dashed">
             <div>{{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.</div>
-            <div><small>Автор: {{ post.author }}</small></div>
+            <div>
+                <small>Автор: {{ post.author }}</small>
+            </div>
         </div>
     {% endfor %}
 
