@@ -46,3 +46,30 @@ class BlogDetails(DetailView):
 class PostDetails(DetailView):
     template_name = 'blogs/post_details.html'
     model = Post
+
+
+class CreatePost(CreateView):
+    model = Post
+    fields = ('blog', 'title', 'content',)
+
+    template_name = 'blogs/create_post.html'
+
+    def get_success_url(self):
+        return resolve_url('blogs:post_details', pk=self.object.pk)
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(CreatePost, self).form_valid(form)
+
+
+class UpdatePost(CreateView):
+    model = Post
+    fields = ('title', 'content',)
+
+    template_name = 'blogs/update_post.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
+
+    def get_success_url(self):
+        return resolve_url('blogs:post_details', pk=self.object.pk)
