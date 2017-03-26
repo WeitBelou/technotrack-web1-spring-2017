@@ -10,6 +10,12 @@
         <a href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
     {% endif %}
 
+    <form method="get" action="{% url 'blogs:blog_list' %}">
+        {{ sortform.errors }}
+        {{ sortform.as_p }}
+        <input type="submit" value="Сортировать">
+    </form>
+
     {% for blog in object_list %}
         <div style="border: dashed; margin: 1em">
             <div>
