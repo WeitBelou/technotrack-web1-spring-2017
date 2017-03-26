@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import resolve_url
+from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
 from blogs.models import Blog, Post
+from comments.models import Comment
 
 
 class BlogList(ListView):
@@ -43,9 +44,29 @@ class BlogDetails(DetailView):
     model = Blog
 
 
-class PostDetails(DetailView):
+class PostDetails(CreateView):
+    model = Comment
     template_name = 'blogs/post_details.html'
-    model = Post
+    fields = ('title', 'text',)
+
+    postobject = None
+
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        self.postobject = get_object_or_404(Post, id=pk)
+        return super(PostDetails, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetails, self).get_context_data(**kwargs)
+        context['post'] = self.postobject
+        return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = self.postobject
+        return super(PostDetails, self).form_valid(form)
+
+    def get_success_url(self):
+        return resolve_url('blogs:post_details', pk=self.postobject.pk)
 
 
 class CreatePost(LoginRequiredMixin, CreateView):
