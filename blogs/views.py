@@ -62,7 +62,7 @@ class CreatePost(CreateView):
         return super(CreatePost, self).form_valid(form)
 
 
-class UpdatePost(CreateView):
+class UpdatePost(UpdateView):
     model = Post
     fields = ('title', 'content',)
 
