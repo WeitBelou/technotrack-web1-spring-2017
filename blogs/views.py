@@ -48,7 +48,7 @@ class PostDetails(DetailView):
     model = Post
 
 
-class CreatePost(CreateView):
+class CreatePost(LoginRequiredMixin, CreateView):
     model = Post
     fields = ('blog', 'title', 'content',)
 
@@ -62,7 +62,7 @@ class CreatePost(CreateView):
         return super(CreatePost, self).form_valid(form)
 
 
-class UpdatePost(UpdateView):
+class UpdatePost(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ('title', 'content',)
 
