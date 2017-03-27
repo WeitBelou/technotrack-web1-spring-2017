@@ -3,7 +3,7 @@ from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
-from blogs.forms import SortForm
+from blogs.forms import SortForm, CreatePostForm
 from blogs.models import Blog, Post
 from comments.models import Comment
 
@@ -87,10 +87,13 @@ class PostDetails(CreateView):
 
 
 class CreatePost(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ('blog', 'title', 'content',)
-
+    form_class = CreatePostForm
     template_name = 'blogs/create_post.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(CreatePost, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def get_success_url(self):
         return resolve_url('blogs:post_details', pk=self.object.pk)
