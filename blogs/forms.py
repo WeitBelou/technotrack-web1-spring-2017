@@ -4,14 +4,11 @@ from blogs.models import Post, Blog
 from comments.models import Comment
 
 
-class SortForm(forms.Form):
+class FilterForm(forms.Form):
     sort = forms.ChoiceField(choices=(
         ('title', 'Заголовок'),
         ('description', 'Описание')
     ), initial='title', label='Сортировать по', required=True)
-
-
-class SearchForm(forms.Form):
     search = forms.CharField(max_length=255, label='Поиск', required=False)
 
 

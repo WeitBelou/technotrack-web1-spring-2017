@@ -4,33 +4,29 @@ from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
-from blogs.forms import SortForm, CreatePostForm, CreateCommentForm, SearchForm
+from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm
 from blogs.models import Blog, Post
 
 
 class BlogList(ListView):
     template_name = 'blogs/blog_list.html'
     model = Blog
-    sorting_form = None
-    searching_form = None
+    filter_form = None
 
     def dispatch(self, request, *args, **kwargs):
-        self.sorting_form = SortForm(request.GET)
-        self.searching_form = SearchForm(request.GET)
+        self.filter_form = FilterForm(request.GET)
         return super(BlogList, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BlogList, self).get_context_data(**kwargs)
-        context['sorting_form'] = self.sorting_form
-        context['searching_form'] = self.searching_form
+        context['filter_form'] = self.filter_form
         return context
 
     def get_queryset(self):
         qs = Blog.objects.all()
-        if self.sorting_form.is_valid():
-            qs = qs.order_by(self.sorting_form.cleaned_data['sort'])
-        if self.searching_form.is_valid():
-            qs = qs.filter(title__contains=self.searching_form.cleaned_data['search'])
+        if self.filter_form.is_valid():
+            qs = qs.order_by(self.filter_form.cleaned_data['sort'])
+            qs = qs.filter(title__contains=self.filter_form.cleaned_data['search'])
         return qs
 
 

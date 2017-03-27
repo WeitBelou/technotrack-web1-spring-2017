@@ -12,16 +12,9 @@
 
     <form method="get" action="{% url 'blogs:blog_list' %}">
         <table>
-            {{ sorting_form.as_table }}
+            {{ filter_form.as_table }}
         </table>
-        <input type="submit" value="Сортировать">
-    </form>
-
-    <form method="get" action="{% url 'blogs:blog_list' %}">
-        <table>
-            {{ searching_form.as_table }}
-        </table>
-        <input type="submit" value="Поиск">
+        <input type="submit" value="Фильтр">
     </form>
 
     {% for blog in object_list %}
