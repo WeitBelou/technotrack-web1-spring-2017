@@ -32,4 +32,4 @@ class CreateCommentForm(forms.ModelForm):
         super(CreateCommentForm, self).__init__(*args, **kwargs)
 
     def is_valid(self):
-        return self.user.is_authenticated and super(CreateCommentForm, self).is_valid()
+        return self.user.au and super(CreateCommentForm, self).is_valid()
