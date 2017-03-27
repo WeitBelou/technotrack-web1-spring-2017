@@ -16,12 +16,15 @@
     <div>
         {% include "comments/comments_list.html" with object_list=post.comments.all %}
     </div>
-    <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Отправить">
-    </form>
+
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Отправить">
+        </form>
+    {% endif %}
 
 {% endblock %}

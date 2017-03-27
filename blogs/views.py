@@ -3,7 +3,7 @@ from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
-from blogs.forms import SortForm, CreatePostForm
+from blogs.forms import SortForm, CreatePostForm, CreateCommentForm
 from blogs.models import Blog, Post
 from comments.models import Comment
 
@@ -62,15 +62,19 @@ class BlogDetails(DetailView):
 
 
 class PostDetails(CreateView):
-    model = Comment
+    form_class = CreateCommentForm
     template_name = 'blogs/post_details.html'
-    fields = ('title', 'text',)
 
     postobject = None
 
     def dispatch(self, request, pk=None, *args, **kwargs):
         self.postobject = get_object_or_404(Post, id=pk)
         return super(PostDetails, self).dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(PostDetails, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(PostDetails, self).get_context_data(**kwargs)
