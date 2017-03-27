@@ -11,8 +11,8 @@
     {% endif %}
 
     <form method="get" action="{% url 'blogs:blog_list' %}">
-        {{ sortform.errors }}
-        {{ sortform.as_p }}
+        {{ sorting_form.errors }}
+        {{ sorting_form.as_p }}
         <input type="submit" value="Сортировать">
     </form>
 

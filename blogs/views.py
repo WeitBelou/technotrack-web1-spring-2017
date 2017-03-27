@@ -1,39 +1,31 @@
-from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
+from blogs.forms import SortForm
 from blogs.models import Blog, Post
 from comments.models import Comment
-
-
-class SortForm(forms.Form):
-    sort = forms.ChoiceField(choices=(
-        ('title', 'Заголовок'),
-        ('description', 'Описание')
-    ), initial='title', label='Сортировать по')
 
 
 class BlogList(ListView):
     template_name = 'blogs/blog_list.html'
     model = Blog
-
-    sortform = None
+    sorting_form = None
 
     def dispatch(self, request, *args, **kwargs):
-        self.sortform = SortForm(request.GET)
+        self.sorting_form = SortForm(request.GET)
         return super(BlogList, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BlogList, self).get_context_data(**kwargs)
-        context['sortform'] = self.sortform
+        context['sorting_form'] = self.sorting_form
         return context
 
     def get_queryset(self):
         qs = Blog.objects.all()
-        if self.sortform.is_valid():
-            qs = qs.order_by(self.sortform.cleaned_data['sort'])
+        if self.sorting_form.is_valid():
+            qs = qs.order_by(self.sorting_form.cleaned_data['sort'])
         return qs
 
 
