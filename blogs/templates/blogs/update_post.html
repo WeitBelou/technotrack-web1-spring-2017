@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+    <a href="{% url 'blogs:blog_list' %}">К списку блогов</a>
     <form method="post" action="{% url 'blogs:update_post' pk=object.pk %}">
         {% csrf_token %}
         <div>{{ form.errors }}</div>
