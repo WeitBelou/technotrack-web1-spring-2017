@@ -1,7 +1,9 @@
-from django.views.generic import TemplateView
+from django.shortcuts import resolve_url
+from django.views.generic import TemplateView, CreateView
 
 from blogs.models import Blog, Post, Like
 from comments.models import Comment
+from core.forms import UserCreationForm
 from core.models import User
 
 
@@ -16,3 +18,14 @@ class HomePageView(TemplateView):
         context['n_comments'] = Comment.objects.all().count()
         context['n_likes'] = Like.objects.all().count()
         return context
+
+
+class RegisterView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'core/register.html'
+
+    def get_success_url(self):
+        return resolve_url('core:login')
+
+    def form_valid(self, form):
+        return super(RegisterView, self).form_valid(form)
