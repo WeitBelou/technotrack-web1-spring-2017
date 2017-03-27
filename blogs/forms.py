@@ -8,7 +8,8 @@ class FilterForm(forms.Form):
     sort = forms.ChoiceField(choices=(
         ('title', 'Заголовок'),
         ('description', 'Описание')
-    ), initial='title', label='Сортировать по', required=True)
+    ), label='Сортировать по', required=False)
+
     search = forms.CharField(max_length=255, label='Поиск', required=False)
 
 

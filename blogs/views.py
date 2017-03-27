@@ -25,7 +25,8 @@ class BlogList(ListView):
     def get_queryset(self):
         qs = Blog.objects.all()
         if self.filter_form.is_valid():
-            qs = qs.order_by(self.filter_form.cleaned_data['sort'])
+            if self.filter_form.cleaned_data.get('sort'):
+                qs = qs.order_by(self.filter_form.cleaned_data['sort'])
             qs = qs.filter(title__contains=self.filter_form.cleaned_data['search'])
         return qs
 
