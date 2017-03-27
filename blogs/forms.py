@@ -8,7 +8,11 @@ class SortForm(forms.Form):
     sort = forms.ChoiceField(choices=(
         ('title', 'Заголовок'),
         ('description', 'Описание')
-    ), initial='title', label='Сортировать по')
+    ), initial='title', label='Сортировать по', required=True)
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=255, label='Поиск', required=False)
 
 
 class CreatePostForm(forms.ModelForm):
@@ -19,7 +23,7 @@ class CreatePostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         super(CreatePostForm, self).__init__(*args, **kwargs)
-        self.fields['blog'].queryse = Blog.objects.filter(owner=user)
+        self.fields['blog'].queryset = Blog.objects.filter(owner=user)
 
 
 class CreateCommentForm(forms.ModelForm):
@@ -28,8 +32,7 @@ class CreateCommentForm(forms.ModelForm):
         fields = ('title', 'text',)
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
         super(CreateCommentForm, self).__init__(*args, **kwargs)
 
     def is_valid(self):
-        return self.user.is_authenticated and super(CreateCommentForm, self).is_valid()
+        return super(CreateCommentForm, self).is_valid()

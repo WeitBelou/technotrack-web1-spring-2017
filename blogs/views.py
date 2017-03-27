@@ -1,31 +1,36 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
-from blogs.forms import SortForm, CreatePostForm, CreateCommentForm
+from blogs.forms import SortForm, CreatePostForm, CreateCommentForm, SearchForm
 from blogs.models import Blog, Post
-from comments.models import Comment
 
 
 class BlogList(ListView):
     template_name = 'blogs/blog_list.html'
     model = Blog
     sorting_form = None
+    searching_form = None
 
     def dispatch(self, request, *args, **kwargs):
         self.sorting_form = SortForm(request.GET)
+        self.searching_form = SearchForm(request.GET)
         return super(BlogList, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(BlogList, self).get_context_data(**kwargs)
         context['sorting_form'] = self.sorting_form
+        context['searching_form'] = self.searching_form
         return context
 
     def get_queryset(self):
         qs = Blog.objects.all()
         if self.sorting_form.is_valid():
             qs = qs.order_by(self.sorting_form.cleaned_data['sort'])
+        if self.searching_form.is_valid():
+            qs = qs.filter(title__contains=self.searching_form.cleaned_data['search'])
         return qs
 
 
@@ -67,14 +72,14 @@ class PostDetails(CreateView):
 
     postobject = None
 
+    def post(self, request, *args, **kwargs):
+        if request.user.is_anonymous:
+            raise PermissionDenied()
+        return super().post(request, *args, **kwargs)
+
     def dispatch(self, request, pk=None, *args, **kwargs):
         self.postobject = get_object_or_404(Post, id=pk)
         return super(PostDetails, self).dispatch(request, *args, **kwargs)
-
-    def get_form_kwargs(self):
-        kwargs = super(PostDetails, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(PostDetails, self).get_context_data(**kwargs)
