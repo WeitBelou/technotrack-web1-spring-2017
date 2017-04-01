@@ -2,21 +2,42 @@
 
 {% load bootstrap3 %}
 
-{% block bootstrap3_content %}
-    <div class="container">
-        <header>{% block title %}(no title){% endblock %}</header>
-        <nav>
-            <a href="{% url 'home' %}">Главная</a>
-            <a href="{% url 'blogs:blog_list' %}">Блоги</a>
+{% bootstrap_css %}
 
-            {% if user.is_anonymous %}
-                <a href="{% url 'core:login' %}">Вход</a>
-                <a href="{% url 'core:register' %}">Регистрация</a>
-            {% else %}
-                Привет, {{ user.username }}.
-                <a href="{% url 'core:logout' %}">Выйти</a>
-            {% endif %}
-        </nav>
+{% block bootstrap3_content %}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">Web-blog</a>
+            </div>
+
+            <div class="navbar-collapse" id="menuNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a class="active" href="{% url 'home' %}">Главная</a></li>
+                    <li><a class="active" href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+                </ul>
+
+                <div class="navbar-right">
+                    {% if user.is_anonymous %}
+                        <a class="btn btn-success navbar-btn " href="{% url 'core:login' %}">Вход</a>
+                        <a class="btn btn-info navbar-btn " href="{% url 'core:register' %}">Регистрация</a>
+                    {% else %}
+                        <p class="navbar-text">Привет, {{ user.username }}.</p>
+                        <a class="btn btn-danger navbar-btn" href="{% url 'core:logout' %}">Выйти</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <header>{% block title %}(no title){% endblock %}</header>
 
         {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
 
