@@ -1,21 +1,15 @@
-{% extends 'core/boostrap_wrapper.html' %}
+{% extends 'core/base.html' %}
+
+{% load bootstrap3 %}
 
 {% block title %}
     Редактирование блога.
 {% endblock %}
 
-{% block page_title %}
-    Редактирование блога.
-{% endblock %}
-
 {% block content %}
-    <a href="{% url 'blogs:blog_list' %}">К списку блогов</a>
     <form method="post" action="{% url 'blogs:update_blog'  pk=object.pk %}">
         {% csrf_token %}
-        <div>{{ form.errors }}</div>
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Сохранить">
+        {% bootstrap_form form %}
+        {% buttons submit='Сохранить' %}{% endbuttons %}
     </form>
 {% endblock %}

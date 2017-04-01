@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'core:register' %}">
+    <form method="post" enctype="multipart/form-data" action="{% url 'core:register' %}">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons submit='Регистрация' %}{% endbuttons %}
