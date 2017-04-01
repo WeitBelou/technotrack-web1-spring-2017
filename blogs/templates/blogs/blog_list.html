@@ -1,35 +1,38 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}Список блогов.{% endblock %}
-{% block page_title %}Список блогов.{% endblock %}
 
 {% block content %}
-    <a href="{% url 'home' %}"><h3>Домашняя страница</h3></a>
+    <form method="get" action="{% url 'blogs:blog_list' %}">
+        {% bootstrap_form filter_form %}
+        {% buttons submit='Фильтр' %}{% endbuttons %}
+    </form>
 
     {% if user.is_authenticated %}
         <a href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
     {% endif %}
 
-    <form method="get" action="{% url 'blogs:blog_list' %}">
-        <table>
-            {{ filter_form.as_table }}
-        </table>
-        <input type="submit" value="Фильтр">
-    </form>
-
-    {% for blog in object_list %}
-        <div style="border: dashed; margin: 1em">
-            <div>
+    <article>
+        {% for blog in object_list %}
+            <section>
                 <a href="{% url 'blogs:blog_details' pk=blog.id %}"><h3>{{ blog.title }}</h3></a>
-                {% if user == blog.owner %}
-                    <a href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
-                {% endif %}
-            </div>
-            <div>{{ blog.description }}</div>
-            <div>
-                <small>Владелец: {{ blog.owner }}</small>
-            </div>
-        </div>
-    {% endfor %}
+
+                <details>
+                    <summary>Описание</summary>
+                    {{ blog.description }}
+                    <hr>
+
+                    <cite>Владелец: {{ blog.owner }}</cite>
+
+                    {% if user == blog.owner %}
+                        <a href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+                    {% endif %}
+                </details>
+
+            </section>
+        {% endfor %}
+    </article>
 
 {% endblock %}

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
     'core.apps.CoreConfig',
     'blogs.apps.BlogsConfig',
     'comments.apps.CommentsConfig',

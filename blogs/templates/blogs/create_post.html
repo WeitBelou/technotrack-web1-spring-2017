@@ -1,21 +1,15 @@
 {% extends 'core/base.html' %}
 
-{% block page_title %}
-    Создание поста.
-{% endblock %}
+{% load bootstrap3 %}
 
 {% block title %}
     Создание поста.
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'blogs:blog_list' %}">К списку блогов</a>
     <form method="post" action="{% url 'blogs:create_post' %}">
         {% csrf_token %}
-        <div>{{ form.errors }}</div>
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Создать">
+        {% bootstrap_form form %}
+        {% buttons submit='Создать' %}{% endbuttons %}
     </form>
 {% endblock %}

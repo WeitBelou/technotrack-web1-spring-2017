@@ -1,30 +1,28 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}
-
-{% endblock %}
-
-{% block page_title %}
     Пост "{{ post.title }}".
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'blogs:blog_details' pk=post.blog_id %}"><h3>Блог</h3></a>
-    <div>{{ post.content }}</div>
-    <hr>
-    <div>Лайков: {{ post.likes.count }}</div>
-    <div>
-        {% include "comments/comments_list.html" with object_list=post.comments.all %}
-    </div>
+    <section>
+        <a href="{% url 'blogs:blog_details' pk=post.blog_id %}">Блог</a>
+        <article>{{ post.content }}</article>
+        <div>Лайков: {{ post.likes.count }}</div>
+    </section>
 
     {% if user.is_authenticated %}
         <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
             {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
-            <input type="submit" value="Отправить">
+            {% bootstrap_form form %}
+            {% buttons submit="Отправить" %}{% endbuttons %}
         </form>
     {% endif %}
+
+    <aside>
+        {% include "comments/comments_list.html" with object_list=post.comments.all %}
+    </aside>
 
 {% endblock %}

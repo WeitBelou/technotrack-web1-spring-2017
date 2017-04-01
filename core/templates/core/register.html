@@ -1,20 +1,15 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}
-
-{% endblock %}
-
-{% block page_title %}
-
+    Регистрация
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'home' %}">На главную</a>
     <form method="post" action="{% url 'core:register' %}">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Зарегистрироваться">
+        {% bootstrap_form form %}
+        {% buttons submit='Регистрация' %}{% endbuttons %}
     </form>
 {% endblock %}

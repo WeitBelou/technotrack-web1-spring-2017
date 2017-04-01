@@ -1,19 +1,16 @@
 {% extends 'core/base.html' %}
 
-{% block page_title %}
-    Вход на сайт.
-{% endblock %}
+{% load bootstrap3 %}
 
 {% block title %}
     Вход на сайт.
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'home' %}">На главную</a>
     <form method="post" action="{% url 'core:login' %}">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Войти">
+        {% bootstrap_form form %}
+        {% buttons submit='Войти' %} {% endbuttons %}
     </form>
 {% endblock %}
 
