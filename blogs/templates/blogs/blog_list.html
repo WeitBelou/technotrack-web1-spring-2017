@@ -50,9 +50,17 @@
                 </a>
               </h4>
             </div>
-            <div id="collapse-{{ blog.id }}" class="panel-collapse collapse in">
+            <div id="collapse-{{ blog.id }}" class="panel-collapse collapse">
               <div class="panel-body">
                 {{ blog.description }}
+                <div class="button-group">
+                  <a href="{% url 'blogs:blog_details' pk=blog.id %}">
+                    <span class="btn btn-success">Читать</span></a>
+                  {% if user == blog.owner %}
+                    <a href="{% url 'blogs:update_blog' pk=blog.id %}">
+                      <span class="btn btn-warning">Редактировать</span></a>
+                  {% endif %}
+                </div>
               </div>
               <div class="panel-footer">
                 Владелец: {{ blog.owner }}
