@@ -3,26 +3,26 @@
 {% load bootstrap3 %}
 
 {% block title %}
-    Пост "{{ post.title }}".
+  Пост "{{ post.title }}".
 {% endblock %}
 
 {% block content %}
-    <section>
-        <a href="{% url 'blogs:blog_details' pk=post.blog_id %}">Блог</a>
-        <article>{{ post.content }}</article>
-        <div>Лайков: {{ post.likes.count }}</div>
-    </section>
+  <section>
+    <a href="{% url 'blogs:blog_details' pk=post.blog_id %}">Блог</a>
+    <article>{{ post.content }}</article>
+    <div>Лайков: {{ post.likes.count }}</div>
+  </section>
 
-    {% if user.is_authenticated %}
-        <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons submit="Отправить" %}{% endbuttons %}
-        </form>
-    {% endif %}
+  {% if user.is_authenticated %}
+    <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons submit="Отправить" %}{% endbuttons %}
+    </form>
+  {% endif %}
 
-    <aside>
-        {% include "comments/comments_list.html" with object_list=post.comments.all %}
-    </aside>
+  <aside>
+    {% include "comments/comments_list.html" with object_list=post.comments.all %}
+  </aside>
 
 {% endblock %}

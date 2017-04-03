@@ -5,42 +5,42 @@
 {% bootstrap_css %}
 
 {% block bootstrap3_content %}
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'home' %}">Web-blog</a>
-            </div>
-
-            <div class="navbar-collapse" id="menuNavbar">
-                <ul class="nav navbar-nav">
-                    <li><a class="active" href="{% url 'home' %}">Главная</a></li>
-                    <li><a class="active" href="{% url 'blogs:blog_list' %}">Блоги</a></li>
-                </ul>
-
-                <div class="navbar-right">
-                    {% if user.is_anonymous %}
-                        <a class="btn btn-success navbar-btn " href="{% url 'core:login' %}">Вход</a>
-                        <a class="btn btn-info navbar-btn " href="{% url 'core:register' %}">Регистрация</a>
-                    {% else %}
-                        <p class="navbar-text">Привет, {{ user.username }}.</p>
-                        <a class="btn btn-danger navbar-btn" href="{% url 'core:logout' %}">Выйти</a>
-                    {% endif %}
-                </div>
-            </div>
-
-        </div>
-    </nav>
-
+  <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <header class="h2">{% block title %}(no title){% endblock %}</header>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">Web-blog</a>
+      </div>
 
-        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+      <div class="navbar-collapse" id="menuNavbar">
+        <ul class="nav navbar-nav">
+          <li><a class="active" href="{% url 'home' %}">Главная</a></li>
+          <li><a class="active" href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+        </ul>
 
-        {% block content %}(no content){% endblock %}
+        <div class="navbar-right">
+          {% if user.is_anonymous %}
+            <a class="btn btn-success navbar-btn " href="{% url 'core:login' %}">Вход</a>
+            <a class="btn btn-info navbar-btn " href="{% url 'core:register' %}">Регистрация</a>
+          {% else %}
+            <p class="navbar-text">Привет, {{ user.username }}.</p>
+            <a class="btn btn-danger navbar-btn" href="{% url 'core:logout' %}">Выйти</a>
+          {% endif %}
+        </div>
+      </div>
+
     </div>
+  </nav>
+
+  <div class="container-fluid">
+    <header class="h2">{% block title %}(no title){% endblock %}</header>
+
+    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+    {% block content %}(no content){% endblock %}
+  </div>
 {% endblock %}

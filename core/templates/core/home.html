@@ -1,19 +1,19 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    Главная страница.
+  Главная страница.
 {% endblock %}
 
 {% block header %}
-    Главная страница.
+  Главная страница.
 {% endblock %}
 
 {% block content %}
-    <ul class="list-group">
-        <li class="list-group-item">Пользователей<span class="badge">{{ n_users }}</span></li>
-        <li class="list-group-item">Блогов<span class="badge">{{ n_blogs }}</span></li>
-        <li class="list-group-item">Постов<span class="badge">{{ n_posts }}</span></li>
-        <li class="list-group-item">Комментариев<span class="badge">{{ n_comments }}</span></li>
-        <li class="list-group-item">Лайков<span class="badge">{{ n_likes }}</span></li>
-    </ul>
+  <ul class="list-group">
+    <li class="list-group-item">Пользователей<span class="badge">{{ n_users }}</span></li>
+    <li class="list-group-item">Блогов<span class="badge">{{ n_blogs }}</span></li>
+    <li class="list-group-item">Постов<span class="badge">{{ n_posts }}</span></li>
+    <li class="list-group-item">Комментариев<span class="badge">{{ n_comments }}</span></li>
+    <li class="list-group-item">Лайков<span class="badge">{{ n_likes }}</span></li>
+  </ul>
 {% endblock %}

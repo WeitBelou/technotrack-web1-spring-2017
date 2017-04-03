@@ -1,38 +1,38 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    Блог "{{ object.title }}".
+  Блог "{{ object.title }}".
 {% endblock %}
 
 {% block content %}
-    <article>
-        <div>{{ object.description }}</div>
+  <article>
+    <div>{{ object.description }}</div>
 
-        {% if user == object.owner %}
-            <a href="{% url 'blogs:create_post' %}">Создать пост. </a>
-        {% endif %}
-    </article>
+    {% if user == object.owner %}
+      <a href="{% url 'blogs:create_post' %}">Создать пост. </a>
+    {% endif %}
+  </article>
 
 
-    <article>
-        {% for post in object.posts.all %}
-            <section>
-                {{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.
+  <article>
+    {% for post in object.posts.all %}
+      <section>
+        {{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.
 
-                <details>
-                    <summary>Описание</summary>
+        <details>
+          <summary>Описание</summary>
 
-                    <hr>
+          <hr>
 
-                    <cite>Автор: {{ post.author }}</cite>
+          <cite>Автор: {{ post.author }}</cite>
 
-                    {% if user == post.author %}
-                        <a href="{% url 'blogs:update_post' pk=post.id %}">Редактировать. </a>
-                    {% endif %}
-                </details>
+          {% if user == post.author %}
+            <a href="{% url 'blogs:update_post' pk=post.id %}">Редактировать. </a>
+          {% endif %}
+        </details>
 
-            </section>
-        {% endfor %}
-    </article>
+      </section>
+    {% endfor %}
+  </article>
 
 {% endblock %}

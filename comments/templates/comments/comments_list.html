@@ -1,9 +1,9 @@
 <header>Комментарии</header>
 {% for comment in object_list %}
-    <section>
-        <img src="{{ comment.author.avatar.url }}">
-        <header>({{ comment.created_at }}){{ comment.author }}:{{ comment.title }}</header>
-        <article>{{ comment.text }}</article>
-    </section>
+  <section>
+    <img src="{{ comment.author.avatar.url }}">
+    <header>({{ comment.created_at }}){{ comment.author }}:{{ comment.title }}</header>
+    <article>{{ comment.text }}</article>
+  </section>
 
 {% endfor %}

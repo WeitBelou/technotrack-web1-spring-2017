@@ -3,13 +3,13 @@
 {% load bootstrap3 %}
 
 {% block title %}
-    Редактирование блога.
+  Редактирование блога.
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'blogs:update_blog'  pk=object.pk %}">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons submit='Сохранить' %}{% endbuttons %}
-    </form>
+  <form method="post" action="{% url 'blogs:update_blog'  pk=object.pk %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons submit='Сохранить' %}{% endbuttons %}
+  </form>
 {% endblock %}
