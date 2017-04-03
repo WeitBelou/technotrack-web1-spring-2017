@@ -124,5 +124,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/home/ivan/Code/web-technotrack/media/'
+MEDIA_ROOT = '../media/'
 MEDIA_URL = '/media/'
