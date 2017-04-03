@@ -3,8 +3,6 @@ from django.db import models
 
 
 class Category(models.Model):
-    blog = models.ManyToManyField('Blog', related_name='blogs')
-
     name = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
