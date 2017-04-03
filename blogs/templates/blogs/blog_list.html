@@ -55,7 +55,7 @@
               <div class="panel-body">
                 {{ blog.description }}
                 {% if user == blog.owner %}
-                  <a class="btn btn-warning" href="{% url 'blogs:blog_details' pk=blog.id %}">Редактировать</a>
+                  <a class="btn btn-warning" href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
                 {% endif %}
               </div>
               <div class="panel-footer">
