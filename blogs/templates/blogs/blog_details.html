@@ -1,38 +1,50 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}
   Блог "{{ object.title }}".
 {% endblock %}
 
 {% block content %}
-  <article>
-    <div>{{ object.description }}</div>
+  <ul class="list-group">
 
-    {% if user == object.owner %}
-      <a href="{% url 'blogs:create_post' %}">Создать пост. </a>
-    {% endif %}
-  </article>
+    <li class="list-group-item">
 
+      <div class="">
+        {% if user.is_authenticated %}
+          <a class="btn btn-success" href="{% url 'blogs:create_post' %}">Создать новый пост</a>
+        {% endif %}
+      </div>
+    </li>
 
-  <article>
-    {% for post in object.posts.all %}
-      <section>
-        {{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.
+    <li class="list-group-item">
 
-        <details>
-          <summary>Описание</summary>
-
-          <hr>
-
-          <cite>Автор: {{ post.author }}</cite>
-
-          {% if user == post.author %}
-            <a href="{% url 'blogs:update_post' pk=post.id %}">Редактировать. </a>
-          {% endif %}
-        </details>
-
-      </section>
-    {% endfor %}
-  </article>
+      <div class="panel-group" id="accordion">
+        {% for post in blog.posts.all %}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ post.id }}">
+                  {{ post.title }}.
+                  <a class="btn btn-info" href="{% url 'blogs:post_details' pk=post.id %}">Смотреть</a>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse-{{ post.id }}" class="panel-collapse collapse in">
+              <div class="panel-body">
+                {{ blog.description }}
+              </div>
+              <div class="panel-footer">
+                {% if user == post.author %}
+                  <a class="btn btn-warning" href="{% url 'blogs:blog_details' pk=post.id %}">Редактировать</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </li>
+  </ul>
 
 {% endblock %}
