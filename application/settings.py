@@ -124,5 +124,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '../media/'
+MEDIA_ROOT =  '/home/ivan/Projects/track_mail/technotrack-web1-spring-2017/media'
 MEDIA_URL = '/media/'

@@ -8,8 +8,12 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ comment.id }}">
-            <img src="{% static comment.author.avatar.url %}">
-            {{ comment.title }}.
+            <div class="row">
+              <div class="col-md-1">
+                <img src="{{ comment.author.avatar.url }}" class="img-responsive">
+              </div>
+              <div class="col-md-1">{{ comment.title }}.</div>
+            </div>
           </a>
         </h4>
       </div>
