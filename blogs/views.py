@@ -4,7 +4,7 @@ from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
 
-from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm
+from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm, UpdateBlogForm, CreateBlogForm, UpdatePostForm
 from blogs.models import Blog, Post
 
 
@@ -32,8 +32,7 @@ class BlogList(ListView):
 
 
 class CreateBlog(LoginRequiredMixin, CreateView):
-    model = Blog
-    fields = ('title', 'description', 'category')
+    form_class = CreateBlogForm
 
     template_name = 'blogs/create_blog.html'
 
@@ -46,8 +45,7 @@ class CreateBlog(LoginRequiredMixin, CreateView):
 
 
 class UpdateBlog(LoginRequiredMixin, UpdateView):
-    model = Blog
-    fields = ('title', 'description', 'category')
+    form_class = UpdateBlogForm
 
     template_name = 'blogs/update_blog.html'
 
@@ -110,8 +108,7 @@ class CreatePost(LoginRequiredMixin, CreateView):
 
 
 class UpdatePost(LoginRequiredMixin, UpdateView):
-    model = Post
-    fields = ('title', 'content',)
+    form_class = UpdatePostForm
 
     template_name = 'blogs/update_post.html'
 

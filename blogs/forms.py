@@ -24,6 +24,12 @@ class CreatePostForm(forms.ModelForm):
         self.fields['blog'].queryset = Blog.objects.filter(owner=user)
 
 
+class UpdatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content')
+
+
 class CreateCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -34,3 +40,15 @@ class CreateCommentForm(forms.ModelForm):
 
     def is_valid(self):
         return super(CreateCommentForm, self).is_valid()
+
+
+class CreateBlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('title', 'description', 'category')
+
+
+class UpdateBlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('title', 'description', 'category')
