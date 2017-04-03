@@ -7,22 +7,27 @@
 {% endblock %}
 
 {% block content %}
-  <section>
-    <a href="{% url 'blogs:blog_details' pk=post.blog_id %}">Блог</a>
-    <article>{{ post.content }}</article>
-    <div>Лайков: {{ post.likes.count }}</div>
-  </section>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <section>
+        <article>{{ post.content }}</article>
+        <div>Лайков: {{ post.likes.count }}</div>
+      </section>
+    </li>
 
-  {% if user.is_authenticated %}
-    <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      {% buttons submit="Отправить" %}{% endbuttons %}
-    </form>
-  {% endif %}
+    <li class="list-group-item">
+      {% if user.is_authenticated %}
+        <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons submit="Отправить" %}{% endbuttons %}
+        </form>
+      {% endif %}
+    </li>
 
-  <aside>
-    {% include "comments/comments_list.html" with object_list=post.comments.all %}
-  </aside>
+    <li class="list-group-item">
+      {% include "comments/comments_list.html" with object_list=post.comments.all %}
+    </li>
+  </ul>
 
 {% endblock %}
