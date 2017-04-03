@@ -30,12 +30,9 @@
     </li>
 
     <li class="list-group-item">
-
-      <div class="">
         {% if user.is_authenticated %}
           <a class="btn btn-success" href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
         {% endif %}
-      </div>
     </li>
 
     <li class="list-group-item">

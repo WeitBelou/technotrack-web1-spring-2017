@@ -10,12 +10,13 @@
   <ul class="list-group">
 
     <li class="list-group-item">
+       {{ blog.description }}
+    </li>
 
-      <div class="">
-        {% if user.is_authenticated %}
-          <a class="btn btn-success" href="{% url 'blogs:create_post' %}">Создать новый пост</a>
-        {% endif %}
-      </div>
+    <li class="list-group-item">
+      {% if user == blog.author %}
+        <a class="btn btn-success" href="{% url 'blogs:create_post' %}">Создать новый пост</a>
+      {% endif %}
     </li>
 
     <li class="list-group-item">
