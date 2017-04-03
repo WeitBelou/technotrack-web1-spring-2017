@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import resolve_url
 from django.views.generic import TemplateView, CreateView
 
@@ -11,6 +12,7 @@ class HomePageView(TemplateView):
     template_name = 'core/home.html'
 
     def get_context_data(self, **kwargs):
+        messages.info(self.request, '<div style="red">Another message<div>')
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['n_users'] = User.objects.all().count()
         context['n_blogs'] = Blog.objects.all().count()

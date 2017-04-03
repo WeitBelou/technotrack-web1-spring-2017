@@ -16,10 +16,10 @@
         <a class="navbar-brand" href="{% url 'home' %}">Web-blog</a>
       </div>
 
-      <div class="navbar-collapse" id="menuNavbar">
+      <div class="navbar-collapse collapse" id="menuNavbar">
         <ul class="nav navbar-nav">
-          <li><a class="active" href="{% url 'home' %}">Главная</a></li>
-          <li><a class="active" href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+          <li><a href="{% url 'home' %}">Главная</a></li>
+          <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
         </ul>
 
         <div class="navbar-right">

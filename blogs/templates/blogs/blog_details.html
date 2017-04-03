@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-  <ul class="list-group">
+  <ul class="li st-group">
 
     <li class="list-group-item">
        {{ blog.description }}
@@ -23,26 +23,9 @@
 
       <div class="panel-group" id="accordion">
         {% for post in blog.posts.all %}
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ post.id }}">
-                  {{ post.title }}.
-                  <a class="btn btn-info" href="{% url 'blogs:post_details' pk=post.id %}">Смотреть</a>
-                </a>
-              </h4>
-            </div>
-            <div id="collapse-{{ post.id }}" class="panel-collapse collapse in">
-              <div class="panel-body">
-                {{ blog.description }}
-              </div>
-              <div class="panel-footer">
-                {% if user == post.author %}
-                  <a class="btn btn-warning" href="{% url 'blogs:update_post' pk=post.id %}">Редактировать</a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
+          {% url 'blogs:post_details' pk=post.id as details_url %}
+          {% url 'blogs:post_update' pk=post.id as update_url %}
+          {% include 'accordion/base.html' with id=post.id title=post.title description=post.content|slice:"0:100"|add:"..." details_url=details_url update_url=update_url author=post.author%}
         {% endfor %}
       </div>
     </li>
