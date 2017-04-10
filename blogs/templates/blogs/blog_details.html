@@ -14,7 +14,7 @@
     </li>
 
     <li class="list-group-item">
-      {% if user == blog.author %}
+      {% if user == blog.owner %}
         <a class="btn btn-success" href="{% url 'blogs:create_post' %}">Создать новый пост</a>
       {% endif %}
     </li>
