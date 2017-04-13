@@ -33,7 +33,7 @@ class UpdatePostForm(forms.ModelForm):
 class CreateCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('title', 'text',)
+        fields = ('text',)
 
     def __init__(self, *args, **kwargs):
         super(CreateCommentForm, self).__init__(*args, **kwargs)

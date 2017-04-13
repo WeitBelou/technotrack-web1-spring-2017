@@ -2,30 +2,29 @@
 {% load static %}
 {% bootstrap_css %}
 
-<div class="panel-group" id="accordion">
+<div class="list-group">
   {% for comment in object_list %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ comment.id }}">
-            <div class="row">
-              <div class="col-xs-4 col-md-2">
-                <img src="{{ comment.author.avatar.url }}" class="img-responsive">
-              </div>
-              <div class="col-xs-8 col-md-10">{{ comment.title }}.</div>
-            </div>
-          </a>
-        </h4>
-      </div>
-      <div id="collapse-{{ comment.id }}" class="panel-collapse collapse in">
-        <div class="panel-body">
-          {{ comment.text }}
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-xs-4 col-md-2">
+          {{ comment.author }}
         </div>
-        <div class="panel-footer">
-          Автор: {{ comment.author }}
+        <div class="col-xs-8 col-md-10">
           {{ comment.created_at }}
         </div>
       </div>
-    </div>
+      <div id="collapse-{{ comment.id }}" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4 col-md-2">
+              <img src="{{ comment.author.avatar.url }}" class="img-responsive img-rounded">
+            </div>
+            <div class="col-xs-8 col-md-10">
+              {{ comment.text }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
   {% endfor %}
 </div>

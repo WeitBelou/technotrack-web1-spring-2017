@@ -6,7 +6,6 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     post = models.ForeignKey('blogs.Post', related_name='comments')
 
-    title = models.CharField(max_length=255)
     text = models.TextField()
 
     created_at = models.DateTimeField(auto_now_add=True)
