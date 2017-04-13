@@ -82,11 +82,12 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'web_technotrack_db',
-        'USER': 'admin',
-        'PASSWORD': 'Jr6tGsOjTC',
+        'USER': 'thunderbinder',
+        'PASSWORD': '5y57tswekjxqqjnpo6ow',
         'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -116,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
