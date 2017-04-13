@@ -25,7 +25,7 @@
         {% for post in blog.posts.all %}
           {% url 'blogs:post_details' pk=post.id as details_url %}
           {% url 'blogs:post_update' pk=post.id as update_url %}
-          {% include 'accordion/accordion.html' with id=post.id title=post.title description=post.content|slice:"0:100"|add:"..." details_url=details_url update_url=update_url author=post.author %}
+          {% include 'blogs/posts_accordion.html' with post=post id=post.id%}
         {% endfor %}
       </div>
     </li>
