@@ -9,7 +9,7 @@ from blogs.models import Blog, Post
 
 
 class BlogList(ListView):
-    template_name = 'blogs/blog_list.html'
+    template_name = 'blogs/blog/blog_list.html'
     model = Blog
     filter_form = None
 
@@ -34,7 +34,7 @@ class BlogList(ListView):
 class CreateBlog(LoginRequiredMixin, CreateView):
     form_class = CreateBlogForm
 
-    template_name = 'blogs/create_blog.html'
+    template_name = 'blogs/blog/create_blog.html'
 
     def get_success_url(self):
         return resolve_url('blogs:blog_details', pk=self.object.pk)
@@ -47,7 +47,7 @@ class CreateBlog(LoginRequiredMixin, CreateView):
 class UpdateBlog(LoginRequiredMixin, UpdateView):
     form_class = UpdateBlogForm
 
-    template_name = 'blogs/update_blog.html'
+    template_name = 'blogs/blog/update_blog.html'
 
     def get_queryset(self):
         return Blog.objects.filter(owner=self.request.user)
@@ -57,13 +57,13 @@ class UpdateBlog(LoginRequiredMixin, UpdateView):
 
 
 class BlogDetails(DetailView):
-    template_name = 'blogs/blog_details.html'
+    template_name = 'blogs/blog/blog_details.html'
     model = Blog
 
 
 class PostDetails(CreateView):
     form_class = CreateCommentForm
-    template_name = 'blogs/post_details.html'
+    template_name = 'blogs/post/post_details.html'
 
     postobject = None
 
@@ -92,7 +92,7 @@ class PostDetails(CreateView):
 
 class CreatePost(LoginRequiredMixin, CreateView):
     form_class = CreatePostForm
-    template_name = 'blogs/create_post.html'
+    template_name = 'blogs/post/create_post.html'
 
     def get_form_kwargs(self):
         kwargs = super(CreatePost, self).get_form_kwargs()
@@ -110,7 +110,7 @@ class CreatePost(LoginRequiredMixin, CreateView):
 class UpdatePost(LoginRequiredMixin, UpdateView):
     form_class = UpdatePostForm
 
-    template_name = 'blogs/update_post.html'
+    template_name = 'blogs/post/update_post.html'
 
     def get_queryset(self):
         return Post.objects.filter(author=self.request.user)
