@@ -1,0 +1,19 @@
+{% extends 'core/accordion-base.html' %}
+
+{% block panel-header %}
+  {{ blog.title }}
+{% endblock %}
+
+{% block pannel-body %}
+  {{ blog.description|slice:'0:100'|add:'...'}}
+{% endblock %}
+
+{% block panel-buttons %}
+  <a class="btn btn-info" href="{% url 'blogs:blog_details' pk=id %}">
+    Смотреть
+  </a>
+
+  {% if user == blog.owner %}
+    <a class="btn btn-warning" href="{% url 'blogs:update_blog' pk=id %}">Редактировать</a>
+  {% endif %}
+{% endblock %}
