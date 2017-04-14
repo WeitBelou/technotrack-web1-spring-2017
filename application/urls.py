@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^core/', include('core.urls', namespace='core')),
     url(r'^blogs/', include('blogs.urls', namespace='blogs')),
+    url(r'^comments/', include('comments.urls', namespace='comments')),
 ]

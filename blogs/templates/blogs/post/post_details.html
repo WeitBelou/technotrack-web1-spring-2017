@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% load bootstrap3 %}
+{% bootstrap_javascript %}
 
 {% block title %}
   Пост "{{ post.title }}".
@@ -30,8 +31,7 @@
       {% endif %}
     </li>
 
-    <li class="list-group-item">
-      {% include "comments/comments_list.html" with object_list=post.comments.all %}
+    <li class="list-group-item autoload" data-url="{% url 'comments:comments' pk=post.id %}">
     </li>
   </ul>
 

@@ -14,10 +14,12 @@
   </a>
 
   {% if user == post.author %}
-    <a class="btn btn-warning" data-toggle="modal" href="#update-{{ id }}">Редактировать</a>
+    <a class="btn btn-warning load-on-click" data-toggle="modal" href="#update-{{ id }}-modal"
+    data-url="{% url 'blogs:update_post' pk=id%}"
+    data-destination="#update-{{ id }}-destination">Редактировать</a>
 
-    <div id="update-{{ id }}" class="modal fade" role="dialog">
-      <div class="modal-dialog autoload" data-url="{% url 'blogs:update_post' pk=id%}">
+    <div id="update-{{ id }}-modal" class="modal fade" role="dialog">
+      <div class="modal-dialog" id="update-{{ id }}-destination">
       </div>
     </div>
   {% endif %}
