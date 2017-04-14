@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^core/', include('core.urls', namespace='core')),
     url(r'^blogs/', include('blogs.urls', namespace='blogs')),
-    url(r'^avatar/', include('avatar.urls'))
+    url(r'', include('upload_avatar.urls')),
 ]

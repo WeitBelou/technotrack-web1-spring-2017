@@ -6,7 +6,7 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     fieldsets = BaseUserAdmin.fieldsets + (
-        (u'Дополнительно', {'fields': ('rating',)}),
+        (u'Дополнительно', {'fields': ('avatar', 'rating')}),
     )
 
 
