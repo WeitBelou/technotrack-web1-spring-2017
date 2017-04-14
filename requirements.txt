@@ -8,3 +8,4 @@ django-registration==2.2
 django-bootstrap3==8.2.2
 django-appconf==1.0.2
 dj-database-url==0.4.2
+cloudinary==1.7.0

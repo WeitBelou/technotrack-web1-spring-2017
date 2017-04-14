@@ -24,10 +24,10 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'd6pcq#z@u#&#%(9_i!_2j(g13%o9l)9^!92cpz&0kta39j^28q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'cloudinary',
     'core.apps.CoreConfig',
     'blogs.apps.BlogsConfig',
     'comments.apps.CommentsConfig',
@@ -136,6 +137,10 @@ STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
+# Cloudinary settings
+CLOUDINARY = {
+    'cloud_name': 'hpa0t757j',
+    'api_key': '863654996345188',
+    'api_secret': '6jAOygmaFjTohLx8QNoRmN4NuvI',
+    'max_length': 200,
+}

@@ -12,5 +12,3 @@ urlpatterns = [
     url(r'^core/', include('core.urls', namespace='core')),
     url(r'^blogs/', include('blogs.urls', namespace='blogs')),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

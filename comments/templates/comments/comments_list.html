@@ -1,6 +1,9 @@
 {% load bootstrap3 %}
-{% load static %}
 {% bootstrap_css %}
+
+{% load cloudinary %}
+{% cloudinary_includes %}
+{% cloudinary_js_config %}
 
 <div class="list-group">
   {% for comment in object_list %}
@@ -15,7 +18,7 @@
       </div>
       <div class="row">
         <div class="col-xs-4 col-md-2">
-          <img src="{{ comment.author.avatar.url }}" class="img-responsive">
+          {% cloudinary comment.author.avatar class="img-responsive" %}
         </div>
         <div class="col-xs-8 col-md-10">
           {{ comment.text }}
