@@ -9,9 +9,6 @@ $(function () {
             });
         }, 3000);
 
-        $('.load-on-click').click(function () {
-            var data = $(this).data();
-            $(data.destination).load(data.url);
-        });
+        $.fm({debug: true})
     }
 );

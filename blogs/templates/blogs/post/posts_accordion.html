@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block pannel-body %}
-  {{ post.content|slice:'0:100'|add:'...'}}
+  {{ post.content|slice:'0:100'|add:'...' }}
 {% endblock %}
 
 {% block panel-buttons %}
@@ -14,13 +14,7 @@
   </a>
 
   {% if user == post.author %}
-    <a class="btn btn-warning load-on-click" data-toggle="modal" href="#update-{{ id }}-modal"
-    data-url="{% url 'blogs:update_post' pk=id%}"
-    data-destination="#update-{{ id }}-destination">Редактировать</a>
-
-    <div id="update-{{ id }}-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog" id="update-{{ id }}-destination">
-      </div>
-    </div>
+    <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
+       href="{% url 'blogs:update_post'  pk=id %}">Редактировать</a>
   {% endif %}
 {% endblock %}

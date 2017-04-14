@@ -32,7 +32,8 @@
 
     <li class="list-group-item">
       {% if user.is_authenticated %}
-        <a class="btn btn-success" href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
+        <a class="btn btn-success fm-create" data-fm-head="Создание блога" data-fm-callback="reload"
+           href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
       {% endif %}
     </li>
 

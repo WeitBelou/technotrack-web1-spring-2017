@@ -3,6 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic import DetailView, CreateView, UpdateView
 from django.views.generic import ListView
+from fm.views import AjaxCreateView, AjaxUpdateView
 
 from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm, UpdateBlogForm, CreateBlogForm, UpdatePostForm
 from blogs.models import Blog, Post
@@ -31,29 +32,19 @@ class BlogList(ListView):
         return qs
 
 
-class CreateBlog(LoginRequiredMixin, CreateView):
+class CreateBlog(LoginRequiredMixin, AjaxCreateView):
     form_class = CreateBlogForm
-
-    template_name = 'blogs/blog/create_blog.html'
-
-    def get_success_url(self):
-        return resolve_url('blogs:blog_details', pk=self.object.pk)
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super(CreateBlog, self).form_valid(form)
 
 
-class UpdateBlog(LoginRequiredMixin, UpdateView):
+class UpdateBlog(LoginRequiredMixin, AjaxUpdateView):
     form_class = UpdateBlogForm
-
-    template_name = 'blogs/blog/update_blog.html'
 
     def get_queryset(self):
         return Blog.objects.filter(owner=self.request.user)
-
-    def get_success_url(self):
-        return resolve_url('blogs:blog_details', pk=self.object.pk)
 
 
 class BlogDetails(DetailView):
@@ -90,30 +81,21 @@ class PostDetails(CreateView):
         return resolve_url('blogs:post_details', pk=self.postobject.pk)
 
 
-class CreatePost(LoginRequiredMixin, CreateView):
+class CreatePost(LoginRequiredMixin, AjaxCreateView):
     form_class = CreatePostForm
-    template_name = 'blogs/post/create_post.html'
 
     def get_form_kwargs(self):
         kwargs = super(CreatePost, self).get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
 
-    def get_success_url(self):
-        return resolve_url('blogs:post_details', pk=self.object.pk)
-
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(CreatePost, self).form_valid(form)
 
 
-class UpdatePost(LoginRequiredMixin, UpdateView):
+class UpdatePost(LoginRequiredMixin, AjaxUpdateView):
     form_class = UpdatePostForm
-
-    template_name = 'blogs/post/update_post.html'
 
     def get_queryset(self):
         return Post.objects.filter(author=self.request.user)
-
-    def get_success_url(self):
-        return resolve_url('blogs:post_details', pk=self.object.pk)

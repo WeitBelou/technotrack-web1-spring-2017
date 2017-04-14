@@ -15,7 +15,8 @@
 
     <li class="list-group-item">
       {% if user == blog.owner %}
-        <a class="btn btn-success" href="{% url 'blogs:create_post' %}">Создать новый пост</a>
+        <a class="btn btn-success fm-create" data-fm-head="Создание поста" data-fm-callback="reload"
+           href="{% url 'blogs:create_post' %}">Создать новый пост</a>
       {% endif %}
     </li>
 
@@ -23,7 +24,7 @@
 
       <div class="panel-group" id="accordion">
         {% for post in blog.posts.all %}
-          {% include 'blogs/post/posts_accordion.html' with post=post id=post.id%}
+          {% include 'blogs/post/posts_accordion.html' with post=post id=post.id %}
         {% endfor %}
       </div>
     </li>
