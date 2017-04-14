@@ -5,4 +5,4 @@ Technotrack web1 project spring 2017
 ![Heroku](https://heroku-badge.herokuapp.com/?app=track-mail-web-kosolapov)
 
 ### Ссылка на приложение
-[тыц](track-mail-web-kosolapov.herokuapp.com)
+[тыц](http://track-mail-web-kosolapov.herokuapp.com)
