@@ -9,10 +9,15 @@
 {% block content %}
   <ul class="list-group">
     <li class="list-group-item">
-      <section>
-        <article>{{ post.content }}</article>
-        <div>Лайков: {{ post.likes.count }}</div>
-      </section>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <article>{{ post.content }}</article>
+        </li>
+        <li class="list-group-item">
+          {{ post.likes.count }}
+          <a href="#"> {% bootstrap_icon 'heart' %}</a>
+        </li>
+      </ul>
     </li>
 
     <li class="list-group-item">
