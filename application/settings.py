@@ -17,7 +17,10 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1']
+else:
+    ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
 
 CSRF_COOKIE_SECURE = True
 
