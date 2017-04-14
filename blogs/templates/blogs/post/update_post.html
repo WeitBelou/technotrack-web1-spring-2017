@@ -1,15 +1,20 @@
-{% extends 'core/base.html' %}
-
 {% load bootstrap3 %}
 
-{% block title %}
-  Редактирование поста.
-{% endblock %}
+<div class="modal-content">
+  <form method="post" action="{% url 'blogs:update_post'  pk=object.pk %}">
 
-{% block content %}
-  <form method="post" action="{% url 'blogs:update_post' pk=object.pk %}">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons submit='Сохранить' %}{% endbuttons %}
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Редактирование поста</h4>
+    </div>
+
+    <div class="modal-body">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+    </div>
+    <div class="modal-footer">
+      <input type="submit" value="Сохранить" class="btn btn-success">
+      <input type="reset" value="Закрыть" class="btn btn-danger" data-dismiss="modal">
+    </div>
   </form>
-{% endblock %}
+</div>

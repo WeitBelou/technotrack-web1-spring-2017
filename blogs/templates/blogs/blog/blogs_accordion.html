@@ -14,7 +14,7 @@
   </a>
 
   {% if user == blog.owner %}
-    <a class="btn btn-info" data-toggle="modal" href="#update-{{ id }}">Редактировать</a>
+    <a class="btn btn-warning" data-toggle="modal" href="#update-{{ id }}">Редактировать</a>
 
     <div id="update-{{ id }}" class="modal fade" role="dialog">
       <div class="modal-dialog autoload" data-url="{% url 'blogs:update_blog' pk=id%}">
