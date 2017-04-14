@@ -1,5 +1,4 @@
 {% load bootstrap3 %}
-{% load avatar_tags %}
 {% load static %}
 {% bootstrap_css %}
 
@@ -16,6 +15,7 @@
       </div>
       <div class="row">
         <div class="col-xs-4 col-md-2">
+          <img src="{{ comment.author.avatar.url }}" class="img-responsive">
         </div>
         <div class="col-xs-8 col-md-10">
           {{ comment.text }}

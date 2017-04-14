@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'd6pcq#z@u#&#%(9_i!_2j(g13%o9l)9^!92cpz&0kta39j^28q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
@@ -131,10 +131,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static', 'static_root')
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(os.path.dirname(PROJECT_ROOT), 'static', 'static_files'),
+]
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-SERVE_MEDIA_FILES = True
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media/')
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
+
+MEDIAFILES_DIRS = [
+    os.path.join(os.path.dirname(PROJECT_ROOT), "static", "media"),
+]
