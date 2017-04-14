@@ -9,6 +9,6 @@ $(function () {
             });
         }, 3000);
 
-        $.fm({debug: true})
+        $.fm({debug: false})
     }
 );
