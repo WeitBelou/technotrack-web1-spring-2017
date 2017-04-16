@@ -1,4 +1,4 @@
-from chosen.widgets import ChosenSelect
+from chosen.widgets import ChosenSelectMultiple
 from django import forms
 
 from blogs.models import Post, Blog
@@ -48,7 +48,7 @@ class CreateBlogForm(forms.ModelForm):
         model = Blog
         fields = ('title', 'description', 'category')
         widgets = {
-            'category': ChosenSelect(overlay="Выберите категорию...")
+            'category': ChosenSelectMultiple()
         }
 
 

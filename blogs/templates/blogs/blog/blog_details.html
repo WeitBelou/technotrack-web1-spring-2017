@@ -24,7 +24,7 @@
 
       <div class="panel-group" id="accordion">
         {% for post in blog.posts.all %}
-          {% include 'blogs/post/posts_accordion.html' with post=post%}
+          {% include 'blogs/post/posts_accordion.html' with post=post id=post.id%}
         {% endfor %}
       </div>
     </li>
