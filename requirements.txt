@@ -4,7 +4,7 @@ dj-database-url==0.4.2
 Django==1.11
 django-appconf==1.0.2
 django-bootstrap3==8.2.2
--e "git+https://github.com/gavinhekogan/django-chosen.git#egg=django-chosen"
+-e "git+https://github.com/WeitBelou/django-chosen.git#egg=django-chosen-python3"
 django-crispy-forms==1.6.1
 django-fm==0.2.5
 django-registration==2.2
