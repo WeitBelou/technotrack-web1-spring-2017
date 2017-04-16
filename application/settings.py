@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Security
 
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     SECRET_KEY = 'some-simple-secret-key'
@@ -19,9 +19,6 @@ if DEBUG:
 else:
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
     ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
-
-    SECURE_BROWSER_XSS_FILTER = True
-    X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 
