@@ -1,4 +1,5 @@
 $(function () {
+        // Автообновляемые элементы
         $('.autoload').each(function () {
             $(this).load($(this).attr('data-url'));
         });
@@ -9,6 +10,7 @@ $(function () {
             });
         }, 3000);
 
+        // Отклики на лайки
         $(this).on('click', 'a.ajaxlike', function () {
             var data = $(this).data();
             console.log(data);
@@ -22,8 +24,10 @@ $(function () {
             return false;
         });
 
+        // Настройка автокомплита в select'ах
         $('select').select2();
 
+        // Настраиваем django-fm
         $.fm({debug: false});
         $('body').on("fm.ready", function () {
             $('select').select2();
