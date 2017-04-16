@@ -18,7 +18,7 @@ if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1']
 else:
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
 
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
