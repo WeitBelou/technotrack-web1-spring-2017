@@ -46,9 +46,15 @@ class CreateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'description', 'category')
+        widgets = {
+            'category': forms.SelectMultiple(attrs={'class': 'chosen-select'})
+        }
 
 
 class UpdateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'description', 'category')
+        widgets = {
+            'category': forms.SelectMultiple(attrs={'class': 'chosen-select'})
+        }

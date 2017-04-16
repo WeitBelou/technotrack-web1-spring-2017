@@ -3,7 +3,6 @@ psycopg2==2.7.1
 pillow==4.1.0
 gunicorn==19.7.1
 django==1.11
-django-widget-tweaks==1.4.1
 django-registration==2.2
 django-fm==0.2.5
 django-bootstrap3==8.2.2

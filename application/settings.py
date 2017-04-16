@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'crispy_forms',
     'fm',
-    'widget_tweaks',
     'core.apps.CoreConfig',
     'blogs.apps.BlogsConfig',
     'comments.apps.CommentsConfig',
