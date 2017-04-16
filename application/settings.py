@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Security
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     SECRET_KEY = 'some-simple-secret-key'
