@@ -15,7 +15,7 @@ DEBUG = True
 
 if DEBUG:
     SECRET_KEY = 'some-simple-secret-key'
-    ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1', 'track-mail-web-kosolapov.herokuapp.com']
 else:
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
     ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
