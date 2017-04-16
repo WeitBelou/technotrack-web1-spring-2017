@@ -6,7 +6,12 @@
 {% bootstrap_css %}
 
 {% block bootstrap3_title %}{% block title %}{% endblock %}{% endblock %}
+
+{% block bootstrap3_extra_head %}
+  <link rel="stylesheet" href="{% static 'core/chosen/css/chosen.css' %}">
+{% endblock %}
 {% block bootstrap3_extra_script %}
   <script src="{% static 'core/js/core.js' %}"></script>
+  <script src="{% static 'core/chosen/js/chosen.jquery.min.js' %}"></script>
   {% include 'fm/modal.html' %}
 {% endblock %}

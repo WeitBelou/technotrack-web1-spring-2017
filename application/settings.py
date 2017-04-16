@@ -18,7 +18,7 @@ if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'track-mail-web-kosolapov.herokuapp.com']
 else:
     SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-    ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
+    ALLOWED_HOSTS = ['127.0.0.1', 'track-mail-web-kosolapov.herokuapp.com']
 
 # Application definition
 
@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'crispy_forms',
     'fm',
-    'chosen',
+    'widget_tweaks',
     'core.apps.CoreConfig',
     'blogs.apps.BlogsConfig',
     'comments.apps.CommentsConfig',

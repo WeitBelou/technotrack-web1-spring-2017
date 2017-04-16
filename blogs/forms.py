@@ -1,4 +1,3 @@
-from chosen.widgets import ChosenSelectMultiple
 from django import forms
 
 from blogs.models import Post, Blog
@@ -47,15 +46,9 @@ class CreateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'description', 'category')
-        widgets = {
-            'category': ChosenSelectMultiple()
-        }
 
 
 class UpdateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'description', 'category')
-        widgets = {
-            'category': ChosenSelectMultiple()
-        }

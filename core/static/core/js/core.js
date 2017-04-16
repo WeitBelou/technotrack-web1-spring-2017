@@ -9,6 +9,7 @@ $(function () {
             });
         }, 3000);
 
+        $('.selectmultiple').chosen();
         $.fm({debug: false})
     }
 );
