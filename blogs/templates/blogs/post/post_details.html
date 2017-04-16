@@ -15,8 +15,9 @@
           <article>{{ post.content }}</article>
         </li>
         <li class="list-group-item">
-          {{ post.likes.count }}
-          <a href="#"> {% bootstrap_icon 'heart' %}</a>
+          <a class="btn ajaxlike" data-url="{% url 'blogs:like_post' pk=post.id %}" data-post-id="{{ post.id }}">
+            {% bootstrap_icon 'heart' %}</a>
+          <span id="likes-{{ post.id }}">{{ post.likes.count }}</span>
         </li>
       </ul>
     </li>

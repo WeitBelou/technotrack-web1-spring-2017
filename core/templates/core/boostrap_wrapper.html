@@ -8,6 +8,7 @@
 {% block bootstrap3_title %}{% block title %}{% endblock %}{% endblock %}
 
 {% block bootstrap3_extra_head %}
+  <meta name="csrf" content="{{ csrf_token }}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 {% endblock %}
 
