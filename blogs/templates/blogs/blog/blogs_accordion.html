@@ -9,12 +9,12 @@
 {% endblock %}
 
 {% block panel-buttons %}
-  <a class="btn btn-info" href="{% url 'blogs:blog_details' pk=id %}">
+  <a class="btn btn-info" href="{% url 'blogs:blog_details' pk=blog.id %}">
     Смотреть
   </a>
 
   {% if user == blog.owner %}
     <a class="btn btn-warning fm-update" data-fm-head="Редактирование блога" data-fm-callback="reload"
-       href="{% url 'blogs:update_blog' pk=id %}">Редактировать</a>
+       href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
   {% endif %}
 {% endblock %}

@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Security
 
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     SECRET_KEY = 'some-simple-secret-key'
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'crispy_forms',
     'fm',
+    'chosen',
     'core.apps.CoreConfig',
     'blogs.apps.BlogsConfig',
     'comments.apps.CommentsConfig',

@@ -1,3 +1,4 @@
+from chosen.widgets import ChosenSelect
 from django import forms
 
 from blogs.models import Post, Blog
@@ -46,6 +47,9 @@ class CreateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'description', 'category')
+        widgets = {
+            'category': ChosenSelect(overlay="Выберите категорию...")
+        }
 
 
 class UpdateBlogForm(forms.ModelForm):

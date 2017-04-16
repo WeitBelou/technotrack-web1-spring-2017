@@ -41,7 +41,7 @@
 
       <div class="panel-group" id="accordion">
         {% for blog in object_list %}
-          {% include 'blogs/blog/blogs_accordion.html' with blog=blog id=blog.id %}
+          {% include 'blogs/blog/blogs_accordion.html' with blog=blog%}
         {% endfor %}
       </div>
     </li>
