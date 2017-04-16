@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Security
 
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     SECRET_KEY = 'some-simple-secret-key'
@@ -44,6 +44,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'core:login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+DEFAULT_FORM_TEMPLATE = 'fm/form.html'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

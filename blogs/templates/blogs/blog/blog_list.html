@@ -31,6 +31,7 @@
     </li>
 
     <li class="list-group-item">
+
       {% if user.is_authenticated %}
         <a class="btn btn-success fm-create" data-fm-head="Создание блога" data-fm-callback="reload"
            href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
@@ -38,10 +39,9 @@
     </li>
 
     <li class="list-group-item">
-
       <div class="panel-group" id="accordion">
         {% for blog in object_list %}
-          {% include 'blogs/blog/blogs_accordion.html' with blog=blog id=blog.id%}
+          {% include 'blogs/blog/blogs_accordion.html' with blog=blog id=blog.id %}
         {% endfor %}
       </div>
     </li>

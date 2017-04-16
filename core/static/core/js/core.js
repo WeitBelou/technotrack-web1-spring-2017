@@ -9,7 +9,11 @@ $(function () {
             });
         }, 3000);
 
-        $(".chosen-select").chosen();
-        $.fm({debug: false})
+        $('select').select2();
+
+        $.fm({debug: false});
+        $('body').on("fm.ready", function () {
+            $('select').select2();
+        })
     }
 );
