@@ -2,6 +2,8 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic import RedirectView
 from django.views.static import serve
 
 from core.views import HomePageView
@@ -12,4 +14,11 @@ urlpatterns = [
     url(r'^core/', include('core.urls', namespace='core')),
     url(r'^blogs/', include('blogs.urls', namespace='blogs')),
     url(r'^comments/', include('comments.urls', namespace='comments')),
+
+    url(r'^favicon.ico$',
+        RedirectView.as_view(
+            url=staticfiles_storage.url('core/images/favicon.ico'),
+            permanent=False),
+        name='favicon'
+        )
 ]
