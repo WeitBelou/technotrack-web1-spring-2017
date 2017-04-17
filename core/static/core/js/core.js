@@ -13,12 +13,11 @@ $(function () {
         // Отклики на лайки
         $(this).on('click', 'a.ajaxlike', function () {
             var data = $(this).data();
-            console.log(data);
 
             var likesSpan = $('#likes-' + data.postId);
 
             $.ajax({url: data.url, method: 'post'}).done(function (data, status, response) {
-                    $(likesSpan).html(response.text);
+                    $(likesSpan).html(response.responseText);
                 }
             );
             return false;

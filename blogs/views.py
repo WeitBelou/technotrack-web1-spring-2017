@@ -1,9 +1,12 @@
+from logging import DEBUG
+
+import logging
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views import View
-from django.views.generic import DetailView, CreateView, UpdateView
+from django.views.generic import DetailView, CreateView
 from django.views.generic import ListView
 from fm.views import AjaxCreateView, AjaxUpdateView
 
@@ -103,7 +106,7 @@ class UpdatePost(LoginRequiredMixin, AjaxUpdateView):
         return Post.objects.filter(author=self.request.user)
 
 
-class PostLikeAjax(View):
+class PostLikeAjax(LoginRequiredMixin, View):
     postobject = None
 
     def dispatch(self, request, pk=None, *args, **kwargs):
@@ -111,7 +114,11 @@ class PostLikeAjax(View):
         return super(PostLikeAjax, self).dispatch(request, *args, **kwargs)
 
     def post(self, request):
-        if not self.postobject.likes.filter(author=request.user).exists():
-            like = Like.objects.create(author=self.request.user, post=self.postobject)
+        user_like = self.postobject.likes.filter(author=request.user)
+
+        if user_like.exists():
+            user_like.delete()
+        else:
+            Like.objects.create(author=self.request.user, post=self.postobject)
 
         return HttpResponse(Like.objects.filter(post=self.postobject).count())
