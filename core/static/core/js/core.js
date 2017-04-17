@@ -1,47 +1,46 @@
 $(function () {
         // Автообновляемые элементы
-        $('.autoload').each(function () {
-            $(this).load($(this).attr('data-url'));
-        });
-
-        setInterval(function () {
+        function loadItems() {
             $('.autoload').each(function () {
-                $(this).load($(this).attr('data-url'))
+                $(this).load($(this).attr('data-url'));
             });
-        }, 3000);
+        }
+
+        loadItems();
+        setInterval(loadItems, 3000);
 
         // Отклики на лайки
         $(this).on('click', 'a.ajaxlike', function () {
-            var data = $(this).data();
-
-            var likesSpan = $('#likes-' + data.postId);
             var likeHeart = $(this);
 
+            var data = likeHeart.data();
+
+            var likesSpan = $('#likes-' + data.postId);
+
             $.ajax({url: data.url, method: 'post'}).done(function (data, status, response) {
-                    var responseData = $.parseJSON(response.responseText);
+                var responseData = $.parseJSON(response.responseText);
 
-                    if (responseData.is_liked) {
-                        $(likeHeart).removeClass("text-muted");
-                        $(likeHeart).addClass("text-danger");
-                    } else {
-                        $(likeHeart).removeClass("text-danger");
-                        $(likeHeart).addClass("text-muted");
-                    }
-
-                    $(likesSpan).html(responseData.n_likes);
+                // \todo Переписать на toggleClass
+                if (responseData.is_liked) {
+                    likeHeart.removeClass("text-muted").addClass("text-danger");
+                } else {
+                    likeHeart.removeClass("text-danger").addClass("text-muted");
                 }
-            );
+
+                likesSpan.html(responseData.n_likes);
+            });
 
             return false;
         });
 
-        // Настройка автокомплита в select'ах
-        $('select').select2();
 
         // Настраиваем django-fm
         $.fm({debug: false});
+
+        // Настройка автокомплита в select'ах
+        $('select').select2();
         $('body').on("fm.ready", function () {
-            $('select').select2();
+            $('select', this).select2();
         });
 
         function csrfSafeMethod(method) {
