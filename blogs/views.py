@@ -1,9 +1,6 @@
-from logging import DEBUG
-
-import logging
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views import View
 from django.views.generic import DetailView, CreateView
@@ -70,11 +67,13 @@ class PostDetails(CreateView):
 
     def dispatch(self, request, pk=None, *args, **kwargs):
         self.postobject = get_object_or_404(Post, id=pk)
+        self.is_liked = self.postobject.likes.filter(author=request.user).exists()
         return super(PostDetails, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(PostDetails, self).get_context_data(**kwargs)
         context['post'] = self.postobject
+        context['is_liked'] = self.is_liked
         return context
 
     def form_valid(self, form):
@@ -121,4 +120,9 @@ class PostLikeAjax(LoginRequiredMixin, View):
         else:
             Like.objects.create(author=self.request.user, post=self.postobject)
 
-        return HttpResponse(Like.objects.filter(post=self.postobject).count())
+        data = {
+            'n_likes': Like.objects.filter(post=self.postobject).count(),
+            'is_liked': user_like.exists()
+        }
+
+        return JsonResponse(data)

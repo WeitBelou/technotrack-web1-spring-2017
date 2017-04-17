@@ -15,11 +15,23 @@ $(function () {
             var data = $(this).data();
 
             var likesSpan = $('#likes-' + data.postId);
+            var likeHeart = $(this);
 
             $.ajax({url: data.url, method: 'post'}).done(function (data, status, response) {
-                    $(likesSpan).html(response.responseText);
+                    var responseData = $.parseJSON(response.responseText);
+
+                    if (responseData.is_liked) {
+                        $(likeHeart).removeClass("text-muted");
+                        $(likeHeart).addClass("text-danger");
+                    } else {
+                        $(likeHeart).removeClass("text-danger");
+                        $(likeHeart).addClass("text-muted");
+                    }
+
+                    $(likesSpan).html(responseData.n_likes);
                 }
             );
+
             return false;
         });
 
