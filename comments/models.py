@@ -12,7 +12,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return 'Комментарий #{id}'.format(id=self.id)
+        return 'Комментарий "{text}..." '.format(text=self.text[:40])
 
     class Meta:
         verbose_name = 'Комментарий'
