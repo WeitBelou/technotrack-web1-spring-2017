@@ -13,12 +13,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = False
 
-if DEBUG:
-    SECRET_KEY = 'some-simple-secret-key'
-    ALLOWED_HOSTS = ['127.0.0.1', 'track-mail-web-kosolapov.herokuapp.com']
-else:
-    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-    ALLOWED_HOSTS = ['127.0.0.1', 'track-mail-web-kosolapov.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'track-mail-web-kosolapov.herokuapp.com']
 
 # Application definition
 
