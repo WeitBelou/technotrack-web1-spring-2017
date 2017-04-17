@@ -12,7 +12,7 @@ from blogs.models import Blog, Post, Like
 
 
 class BlogList(ListView):
-    template_name = 'blogs/blog/blog_list.html'
+    template_name = 'blogs/blog_list.html'
     model = Blog
     filter_form = None
 
@@ -50,13 +50,13 @@ class UpdateBlog(LoginRequiredMixin, AjaxUpdateView):
 
 
 class BlogDetails(DetailView):
-    template_name = 'blogs/blog/blog_details.html'
+    template_name = 'blogs/blog_details.html'
     model = Blog
 
 
 class PostDetails(CreateView):
     form_class = CreateCommentForm
-    template_name = 'blogs/post/post_details.html'
+    template_name = 'blogs/post_details.html'
 
     postobject = None
 
@@ -67,7 +67,7 @@ class PostDetails(CreateView):
 
     def dispatch(self, request, pk=None, *args, **kwargs):
         self.postobject = get_object_or_404(Post, id=pk)
-        self.is_liked = self.postobject.likes.filter(author=request.user).exists()
+        self.is_liked = request.user.is_authenticated() and self.postobject.likes.filter(author=request.user).exists()
         return super(PostDetails, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

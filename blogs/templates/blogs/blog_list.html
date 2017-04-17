@@ -35,21 +35,43 @@
       </div>
     </li>
 
-    <li class="list-group-item">
+    {% if user.is_authenticated %}
+      <li class="list-group-item">
 
-      {% if user.is_authenticated %}
         <a class="btn btn-success fm-create" data-fm-head="Создание блога" data-fm-callback="reload"
            href="{% url 'blogs:create_blog' %}">Создать новый блог</a>
-      {% endif %}
-    </li>
+      </li>
+    {% endif %}
 
     <li class="list-group-item">
-      <div class="panel-group" id="accordion">
+      <div class="panel-group">
         {% for blog in object_list %}
-          {% include 'blogs/blog/blogs_accordion.html' with blog=blog id=blog.id %}
+          <div class="panel panel-default">
+
+            <div class="panel-heading">
+              {{ blog.title }}
+            </div>
+
+            <div class="panel-body">
+              {{ blog.description }}
+            </div>
+
+            <div class="panel-footer">
+
+              <a class="btn btn-info" href="{% url 'blogs:blog_details' pk=blog.id %}">
+                Смотреть
+              </a>
+
+              {% if user == blog.owner %}
+                <a class="btn btn-warning fm-update" data-fm-head="Редактирование блога" data-fm-callback="reload"
+                   href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+              {% endif %}
+            </div>
+          </div>
         {% endfor %}
       </div>
     </li>
+
   </ul>
 
 {% endblock %}

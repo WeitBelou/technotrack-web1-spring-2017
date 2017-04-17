@@ -22,16 +22,18 @@
           <article>{{ post.content }}</article>
         </li>
 
-        <li class="list-group-item">
-          {% if user == post.author %}
+        {% if user == post.author %}
+          <li class="list-group-item">
             <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
                href="{% url 'blogs:update_post'  pk=post.id %}">Редактировать</a>
-          {% endif %}
-        </li>
+          </li>
+        {% endif %}
 
         <li class="list-group-item lead">
           <a class="ajaxlike {% if is_liked %} text-danger {% else %} text-muted {% endif %}"
+
              data-url="{% url 'blogs:like_post' pk=post.id %}" data-post-id="{{ post.id }}">
+
             {% bootstrap_icon 'heart' %}</a>
           <span id="likes-{{ post.id }}">{{ post.likes.count }}</span>
         </li>
