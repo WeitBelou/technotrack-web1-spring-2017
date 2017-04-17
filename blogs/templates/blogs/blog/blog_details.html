@@ -6,6 +6,12 @@
   Блог "{{ object.title }}".
 {% endblock %}
 
+{% block navbar_links %}
+  <li><a href="{% url 'home' %}">Главная</a></li>
+  <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+  <li class="active"><a href="{% url 'blogs:blog_details' pk=blog.id %}">Блог: {{ blog.title }}</a></li>
+{% endblock %}
+
 {% block content %}
   <ul class="li st-group">
 

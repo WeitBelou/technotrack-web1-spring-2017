@@ -7,6 +7,13 @@
   Пост "{{ post.title }}".
 {% endblock %}
 
+{% block navbar_links %}
+  <li><a href="{% url 'home' %}">Главная</a></li>
+  <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+  <li class><a href="{% url 'blogs:blog_details' pk=post.blog.id %}">Блог: {{ post.blog.title }}</a></li>
+  <li class="active"><a href="{% url 'blogs:post_details' pk=post.id %}">Пост: {{ post.title }}</a></li>
+{% endblock %}
+
 {% block content %}
   <ul class="list-group">
     <li class="list-group-item">

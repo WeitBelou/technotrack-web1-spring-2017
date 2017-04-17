@@ -19,8 +19,7 @@
 
       <div class="navbar-collapse collapse" id="menuNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="{% url 'home' %}">Главная</a></li>
-          <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+          {% block navbar_links %}{% endblock %}
         </ul>
 
         <div class="navbar-right">

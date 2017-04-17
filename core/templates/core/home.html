@@ -8,6 +8,11 @@
   Главная страница.
 {% endblock %}
 
+{% block navbar_links %}
+  <li class="active"><a href="{% url 'home' %}">Главная</a></li>
+  <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+{% endblock %}
+
 {% block content %}
   <ul class="list-group">
     <li class="list-group-item">Пользователей<span class="badge">{{ n_users }}</span></li>

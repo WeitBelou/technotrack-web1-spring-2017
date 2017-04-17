@@ -4,6 +4,11 @@
 
 {% block title %}Список блогов.{% endblock %}
 
+{% block navbar_links %}
+  <li><a href="{% url 'home' %}">Главная</a></li>
+  <li class="active"><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+{% endblock %}
+
 {% block content %}
   <ul class="list-group">
     <li class="list-group-item">
