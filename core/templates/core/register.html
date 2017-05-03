@@ -2,17 +2,14 @@
 
 {% load bootstrap3 %}
 
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
 {% block title %}
-    Регистрация
+  Регистрация
 {% endblock %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data" action="{% url 'core:register' %}">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons submit='Регистрация' %}{% endbuttons %}
-    </form>
+  <form method="post" enctype="multipart/form-data" action="{% url 'core:register' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons submit='Регистрация' %}{% endbuttons %}
+  </form>
 {% endblock %}

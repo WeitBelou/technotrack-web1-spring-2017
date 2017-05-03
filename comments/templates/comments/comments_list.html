@@ -1,9 +1,24 @@
-<header>Комментарии</header>
-{% for comment in object_list %}
-    <section>
-        <img src="{{ comment.author.avatar.url }}">
-        <header>({{ comment.created_at }}){{ comment.author }}:{{ comment.title }}</header>
-        <article>{{ comment.text }}</article>
-    </section>
+{% load cloudinary %}
 
-{% endfor %}
+<div class="list-group">
+  {% for comment in object_list %}
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-xs-4 col-md-2">
+          {{ comment.author }}
+        </div>
+        <div class="col-xs-8 col-md-10">
+          {{ comment.created_at }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-md-2">
+          {% cloudinary comment.author.avatar class="img-responsive" %}
+        </div>
+        <div class="col-xs-8 col-md-10">
+          {{ comment.text }}
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</div>

@@ -1,28 +1,58 @@
 {% extends 'core/base.html' %}
 
 {% load bootstrap3 %}
+{% bootstrap_javascript %}
 
 {% block title %}
-    Пост "{{ post.title }}".
+  Пост "{{ post.title }}".
+{% endblock %}
+
+{% block navbar_links %}
+  <li><a href="{% url 'home' %}">Главная</a></li>
+  <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+  <li class><a href="{% url 'blogs:blog_details' pk=post.blog.id %}">Блог: {{ post.blog.title }}</a></li>
+  <li class="active"><a href="{% url 'blogs:post_details' pk=post.id %}">Пост: {{ post.title }}</a></li>
 {% endblock %}
 
 {% block content %}
-    <section>
-        <a href="{% url 'blogs:blog_details' pk=post.blog_id %}">Блог</a>
-        <article>{{ post.content }}</article>
-        <div>Лайков: {{ post.likes.count }}</div>
-    </section>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <article>{{ post.content }}</article>
+        </li>
 
-    {% if user.is_authenticated %}
+        {% if user == post.author %}
+          <li class="list-group-item">
+            <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
+               href="{% url 'blogs:update_post'  pk=post.id %}">Редактировать</a>
+          </li>
+        {% endif %}
+
+        <li class="list-group-item lead">
+          <a class="ajaxlike {% if is_liked %} text-danger {% else %} text-muted {% endif %}"
+
+             data-url="{% url 'blogs:like_post' pk=post.id %}" data-post-id="{{ post.id }}">
+
+            {% bootstrap_icon 'heart' %}</a>
+          <span id="likes-{{ post.id }}">{{ post.likes.count }}</span>
+        </li>
+
+      </ul>
+    </li>
+
+    <li class="list-group-item">
+      {% if user.is_authenticated %}
         <form method="post" action="{% url 'blogs:post_details' pk=post.id %}">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons submit="Отправить" %}{% endbuttons %}
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons submit="Отправить" %}{% endbuttons %}
         </form>
-    {% endif %}
+      {% endif %}
+    </li>
 
-    <aside>
-        {% include "comments/comments_list.html" with object_list=post.comments.all %}
-    </aside>
+    <li class="list-group-item autoload" data-url="{% url 'comments:comments' post=post.id %}">
+    </li>
+  </ul>
 
 {% endblock %}

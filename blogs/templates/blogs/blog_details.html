@@ -1,38 +1,61 @@
 {% extends 'core/base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}
-    Блог "{{ object.title }}".
+  Блог "{{ object.title }}".
+{% endblock %}
+
+{% block navbar_links %}
+  <li><a href="{% url 'home' %}">Главная</a></li>
+  <li><a href="{% url 'blogs:blog_list' %}">Блоги</a></li>
+  <li class="active"><a href="{% url 'blogs:blog_details' pk=blog.id %}">Блог: {{ blog.title }}</a></li>
 {% endblock %}
 
 {% block content %}
-    <article>
-        <div>{{ object.description }}</div>
+  <ul class="list-group">
 
-        {% if user == object.owner %}
-            <a href="{% url 'blogs:create_post' %}">Создать пост. </a>
-        {% endif %}
-    </article>
+    <li class="list-group-item">
+      {{ blog.description }}
+    </li>
 
+    {% if user == blog.owner %}
+      <li class="list-group-item">
+        <a class="btn btn-success fm-create" data-fm-head="Создание поста" data-fm-callback="reload"
+           href="{% url 'blogs:create_post' %}">Создать новый пост</a>
 
-    <article>
-        {% for post in object.posts.all %}
-            <section>
-                {{ forloop.counter }}: <a href="{% url 'blogs:post_details' pk=post.id %}">{{ post.title }}</a>.
+        <a class="btn btn-warning fm-update" data-fm-head="Редактирование блога" data-fm-callback="reload"
+           href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+      </li>
+    {% endif %}
 
-                <details>
-                    <summary>Описание</summary>
+    <li class="list-group-item">
 
-                    <hr>
+      <div class="panel-group">
+        {% for post in blog.posts.all %}
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                {{ post.title }}
+              </div>
 
-                    <cite>Автор: {{ post.author }}</cite>
+              <div class="panel-body">
+                {{ post.content|slice:'0:100'|add:'...' }}
+              </div>
 
-                    {% if user == post.author %}
-                        <a href="{% url 'blogs:update_post' pk=post.id %}">Редактировать. </a>
-                    {% endif %}
-                </details>
+              <div class="panel-footer">
+                <a class="btn btn-info" href="{% url 'blogs:post_details' pk=post.id %}">
+                  Смотреть
+                </a>
 
-            </section>
+                {% if user == post.author %}
+                  <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
+                     href="{% url 'blogs:update_post'  pk=post.id %}">Редактировать</a>
+                {% endif %}
+              </div>
+          </div>
         {% endfor %}
-    </article>
+      </div>
+    </li>
+  </ul>
 
 {% endblock %}

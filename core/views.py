@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import resolve_url
 from django.views.generic import TemplateView, CreateView
 

@@ -8,6 +8,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = BaseUserAdmin.fieldsets + (
         (u'Дополнительно', {'fields': ('admin_avatar', 'avatar', 'rating')}),
     )
+
     readonly_fields = ('admin_avatar',)
 
     def admin_avatar(self, instance):
@@ -16,8 +17,7 @@ class UserAdmin(BaseUserAdmin):
         )
 
     admin_avatar.allow_tags = True
-
-    admin_avatar.short_description = 'Аватар'
+    admin_avatar.short_description = u'Аватар'
 
 
 admin.site.register(User, UserAdmin)

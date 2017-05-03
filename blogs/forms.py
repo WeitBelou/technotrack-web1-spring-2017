@@ -17,6 +17,11 @@ class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('blog', 'title', 'content',)
+        labels = {
+            'blog': 'Блог',
+            'title': 'Заголовок',
+            'content': 'Текст поста'
+        }
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -24,13 +29,48 @@ class CreatePostForm(forms.ModelForm):
         self.fields['blog'].queryset = Blog.objects.filter(owner=user)
 
 
+class UpdatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content')
+        labels = {
+            'title': 'Заголовок поста',
+            'content': 'Текст поста'
+        }
+
+
 class CreateCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('title', 'text',)
+        fields = ('text',)
+        labels = {
+            'text': 'Комментарий'
+        }
 
     def __init__(self, *args, **kwargs):
         super(CreateCommentForm, self).__init__(*args, **kwargs)
 
     def is_valid(self):
         return super(CreateCommentForm, self).is_valid()
+
+
+class CreateBlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('title', 'description', 'category')
+        labels = {
+            'title': 'Название блога',
+            'description': 'Краткое описание блога',
+            'category': 'Набор категорий блога'
+        }
+
+
+class UpdateBlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('title', 'description', 'category')
+        labels = {
+            'title': 'Название блога',
+            'description': 'Краткое описание блога',
+            'category': 'Набор категорий блога'
+        }

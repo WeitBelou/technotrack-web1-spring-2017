@@ -3,15 +3,15 @@
 {% load bootstrap3 %}
 
 {% block title %}
-    Вход на сайт.
+  Вход на сайт.
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{% url 'core:login' %}">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons submit='Войти' %} {% endbuttons %}
-    </form>
+  <form method="post" action="{% url 'core:login' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons submit='Войти' %} {% endbuttons %}
+  </form>
 {% endblock %}
 
 {% block footer %}
