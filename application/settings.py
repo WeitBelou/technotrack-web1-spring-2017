@@ -12,7 +12,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Security
 
-DEBUG = True
+DEBUG = False
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
@@ -119,7 +119,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.environ.get('LOG_FILE', default=os.path.join(BASE_DIR, '../logs/debug.log')),
+            'filename': os.environ.get('LOG_FILE', default=os.path.join(BASE_DIR, 'logs/debug.log')),
         }
     },
     'loggers': {
