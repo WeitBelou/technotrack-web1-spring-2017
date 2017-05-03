@@ -4,6 +4,7 @@ Django settings for application project.
 """
 
 import os
+
 import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,18 +12,17 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Security
 
-DEBUG = False
+DEBUG = True
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['webtrack']
 else:
     ALLOWED_HOSTS = ['track-mail-web-kosolapov.herokuapp.com']
 
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
-
 
 # Application definition
 
@@ -83,24 +83,63 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 # Database
 
-## Local
+db_from_env = dj_database_url.config(conn_max_age=600,
+                                     engine='django.db.backends.postgresql_psycopg2')
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'web_technotrack_db',
-        'USER': 'thunderbinder',
-        'PASSWORD': '5y57tswekjxqqjnpo6ow',
-        'HOST': 'localhost',
-        'PORT': '5432'
+    'default': db_from_env
+}
+
+# Logger settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[%{levelname}s] %{asctime}s %{module}s %{process}d %{thread}d %{message}s'
+        },
+        'simple': {
+            'format': '[%{levelname}s] %{message}s'
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.environ.get('LOG_FILE', default=os.path.join(BASE_DIR, '../logs/debug.log')),
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'web_track.custom': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO'
+        }
     }
 }
 
-## For heroku
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
-
 # Password validation
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -132,5 +171,4 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
