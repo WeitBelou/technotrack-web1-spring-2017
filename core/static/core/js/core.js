@@ -20,12 +20,7 @@ $(function () {
             $.ajax({url: data.url, method: 'post'}).done(function (data, status, response) {
                 var responseData = $.parseJSON(response.responseText);
 
-                // \todo Переписать на toggleClass
-                if (responseData.is_liked) {
-                    likeHeart.removeClass("text-muted").addClass("text-danger");
-                } else {
-                    likeHeart.removeClass("text-danger").addClass("text-muted");
-                }
+                likeHeart.toggleClass('is-liked');
 
                 likesSpan.html(responseData.n_likes);
             });

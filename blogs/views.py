@@ -122,7 +122,6 @@ class PostLikeAjax(LoginRequiredMixin, View):
 
         data = {
             'n_likes': Like.objects.filter(post=self.postobject).count(),
-            'is_liked': user_like.exists()
         }
 
         return JsonResponse(data)

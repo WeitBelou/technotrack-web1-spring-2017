@@ -30,7 +30,7 @@
         {% endif %}
 
         <li class="list-group-item lead">
-          <a class="ajaxlike {% if is_liked %} text-danger {% else %} text-muted {% endif %}"
+          <a class="ajaxlike {% if is_liked %}is-liked{% endif %}"
 
              data-url="{% url 'blogs:like_post' pk=post.id %}" data-post-id="{{ post.id }}">
 
