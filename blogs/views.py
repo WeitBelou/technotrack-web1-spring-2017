@@ -7,9 +7,10 @@ from django.shortcuts import resolve_url, get_object_or_404
 from django.views import View
 from django.views.generic import DetailView, CreateView
 from django.views.generic import ListView
-from fm.views import AjaxCreateView, AjaxUpdateView
+from fm.views import AjaxCreateView, AjaxUpdateView, AjaxDeleteView
 
-from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm, UpdateBlogForm, CreateBlogForm, UpdatePostForm
+from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm, UpdateBlogForm, CreateBlogForm, UpdatePostForm, \
+    DeleteBlogForm
 from blogs.models import Blog, Post, Like
 
 
@@ -51,6 +52,13 @@ class UpdateBlog(LoginRequiredMixin, AjaxUpdateView):
         return Blog.objects.filter(owner=self.request.user)
 
 
+class DeleteBlog(LoginRequiredMixin, AjaxDeleteView):
+    form_class = DeleteBlogForm
+
+    def get_queryset(self):
+        return Blog.objects.filter(owner=self.request.user)
+
+
 class BlogDetails(DetailView):
     template_name = 'blogs/blog_details.html'
     model = Blog
@@ -60,7 +68,7 @@ class BlogDetails(DetailView):
         context['posts'] = Post.objects.filter(
             models.Q(blog=self.object)
             & (models.Q(author=self.request.user.id)
-            | models.Q(is_published=True))).annotate(n_likes=Count('likes'))
+               | models.Q(is_published=True))).annotate(n_likes=Count('likes'))
         return context
 
 

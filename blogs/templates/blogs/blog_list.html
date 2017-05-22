@@ -72,6 +72,8 @@
               {% if user.id == blog.owner_id %}
                 <a class="btn btn-warning fm-update" data-fm-head="Редактирование блога" data-fm-callback="reload"
                    href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+                <a class="btn btn-danger fm-delete" data-fm-head="Удаление блога" data-fm-callback="reload"
+                   href="{% url 'blogs:delete_blog' pk=blog.id %}">Удалить</a>
               {% endif %}
             </div>
           </div>

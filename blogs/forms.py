@@ -76,3 +76,14 @@ class UpdateBlogForm(forms.ModelForm):
             'description': 'Краткое описание блога',
             'categories': 'Набор категорий блога'
         }
+
+
+class DeleteBlogForm:
+    class Meta:
+        model = Blog
+        fields = ('title', 'description', 'categories')
+        labels = {
+            'title': 'Название блога',
+            'description': 'Краткое описание блога',
+            'categories': 'Набор категорий блога'
+        }
