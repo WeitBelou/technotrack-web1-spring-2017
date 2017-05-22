@@ -26,9 +26,7 @@ class BlogList(ListView):
         return context
 
     def get_queryset(self):
-        qs = Blog.objects.all()
-        qs = qs.select_related('owner')
-        qs = qs.prefetch_related('categories')
+        qs = Blog.objects.all().optimized()
         if self.filter_form.is_valid():
             if self.filter_form.cleaned_data.get('sort'):
                 qs = qs.order_by(self.filter_form.cleaned_data['sort'])
@@ -57,7 +55,7 @@ class BlogDetails(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogDetails, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(blog=self.object).select_related('author', 'blog')
+        context['posts'] = Post.objects.filter(blog=self.object).optimized()
         return context
 
 

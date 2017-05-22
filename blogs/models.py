@@ -17,6 +17,14 @@ class Category(models.Model):
         ordering = ('-created_at',)
 
 
+class BlogQuerySet(models.QuerySet):
+
+    def optimized(self):
+        qs = self.select_related('owner')
+        qs = qs.select_related('blog')
+        qs = qs.prefetch_related('categories')
+        return qs
+
 class Blog(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blogs')
 
@@ -26,6 +34,8 @@ class Blog(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = BlogQuerySet.as_manager()
 
     def __str__(self):
         return '{title}'.format(title=self.title)
