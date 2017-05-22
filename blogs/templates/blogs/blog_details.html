@@ -26,6 +26,9 @@
 
         <a class="btn btn-warning fm-update" data-fm-head="Редактирование блога" data-fm-callback="reload"
            href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
+
+        <a class="btn btn-danger fm-delete" data-fm-head="Удаление блога" data-fm-callback="reload"
+           href="{% url 'blogs:delete_blog' pk=blog.id %}">Удалить</a>
       </li>
     {% endif %}
 
@@ -54,6 +57,8 @@
                 {% if user.id == post.author_id %}
                   <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
                      href="{% url 'blogs:update_post'  pk=post.id %}">Редактировать</a>
+                  <a class="btn btn-danger fm-delete" data-fm-head="Удаление поста" data-fm-callback="reload"
+                     href="{% url 'blogs:delete_post'  pk=post.id %}">Удалить</a>
                 {% endif %}
               </div>
           </div>

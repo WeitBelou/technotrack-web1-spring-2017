@@ -40,6 +40,16 @@ class UpdatePostForm(forms.ModelForm):
             'is_published': 'Опубликованный',
         }
 
+class DeletePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content', 'is_published')
+        labels = {
+            'title': 'Заголовок поста',
+            'content': 'Текст поста',
+            'is_published': 'Опубликованный',
+        }
+
 
 class CreateCommentForm(forms.ModelForm):
     class Meta:

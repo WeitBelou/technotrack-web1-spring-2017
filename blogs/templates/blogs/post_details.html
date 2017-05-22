@@ -28,6 +28,9 @@
           <li class="list-group-item">
             <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
                href="{% url 'blogs:update_post'  pk=post.id %}">Редактировать</a>
+
+            <a class="btn btn-danger fm-delete" data-fm-head="Удаление поста" data-fm-callback="reload"
+               href="{% url 'blogs:delete_post'  pk=post.id %}">Удалить</a>
           </li>
         {% endif %}
 

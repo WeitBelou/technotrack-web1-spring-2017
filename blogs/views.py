@@ -10,7 +10,7 @@ from django.views.generic import ListView
 from fm.views import AjaxCreateView, AjaxUpdateView, AjaxDeleteView
 
 from blogs.forms import CreatePostForm, CreateCommentForm, FilterForm, UpdateBlogForm, CreateBlogForm, UpdatePostForm, \
-    DeleteBlogForm
+    DeleteBlogForm, DeletePostForm
 from blogs.models import Blog, Post, Like
 
 
@@ -118,6 +118,13 @@ class CreatePost(LoginRequiredMixin, AjaxCreateView):
 
 class UpdatePost(LoginRequiredMixin, AjaxUpdateView):
     form_class = UpdatePostForm
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
+
+
+class DeletePost(LoginRequiredMixin, AjaxDeleteView):
+    form_class = DeletePostForm
 
     def get_queryset(self):
         return Post.objects.filter(author=self.request.user)
