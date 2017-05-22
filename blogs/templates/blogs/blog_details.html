@@ -47,7 +47,7 @@
                   Смотреть
                 </a>
 
-                {% if user == post.author %}
+                {% if user.id == post.author_id %}
                   <a class="btn btn-warning fm-update" data-fm-head="Редактирование поста" data-fm-callback="reload"
                      href="{% url 'blogs:update_post'  pk=post.id %}">Редактировать</a>
                 {% endif %}

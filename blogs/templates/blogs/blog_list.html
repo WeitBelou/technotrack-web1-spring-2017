@@ -62,7 +62,7 @@
                 Смотреть
               </a>
 
-              {% if user == blog.owner %}
+              {% if user.id == blog.owner_id %}
                 <a class="btn btn-warning fm-update" data-fm-head="Редактирование блога" data-fm-callback="reload"
                    href="{% url 'blogs:update_blog' pk=blog.id %}">Редактировать</a>
               {% endif %}
