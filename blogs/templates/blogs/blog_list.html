@@ -58,10 +58,11 @@
 
             <div class="panel-footer">
               {% for category in blog.categories.all %}
-                <p> {{ category.name }}</p>
+                <span class="badge"> {{ category.name }}</span>
               {% endfor %}
+
               <p>
-                Автор: {{ blog.owner.username }}
+                Владелец: {{ blog.owner.username }}
               </p>
 
               <a class="btn btn-info" href="{% url 'blogs:blog_details' pk=blog.id %}">
