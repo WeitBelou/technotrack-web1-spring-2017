@@ -57,20 +57,20 @@ class CreateCommentForm(forms.ModelForm):
 class CreateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ('title', 'description', 'category')
+        fields = ('title', 'description', 'categories')
         labels = {
             'title': 'Название блога',
             'description': 'Краткое описание блога',
-            'category': 'Набор категорий блога'
+            'categories': 'Набор категорий блога'
         }
 
 
 class UpdateBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ('title', 'description', 'category')
+        fields = ('title', 'description', 'categories')
         labels = {
             'title': 'Название блога',
             'description': 'Краткое описание блога',
-            'category': 'Набор категорий блога'
+            'categories': 'Набор категорий блога'
         }

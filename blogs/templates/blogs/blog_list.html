@@ -57,7 +57,9 @@
             </div>
 
             <div class="panel-footer">
-
+              {% for category in blog.categories %}
+                <p> {{ category }}</p>
+              {% endfor %}
               <p>
                 Автор: {{ blog.owner.username }}
               </p>

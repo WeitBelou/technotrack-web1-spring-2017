@@ -28,6 +28,7 @@ class BlogList(ListView):
     def get_queryset(self):
         qs = Blog.objects.all()
         qs = qs.select_related('owner')
+        qs = qs.prefetch_related('categories')
         if self.filter_form.is_valid():
             if self.filter_form.cleaned_data.get('sort'):
                 qs = qs.order_by(self.filter_form.cleaned_data['sort'])

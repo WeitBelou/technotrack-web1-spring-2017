@@ -22,7 +22,7 @@ class Blog(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
-    category = models.ManyToManyField('Category', related_name='categories')
+    categories = models.ManyToManyField('Category', related_name='categories')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
