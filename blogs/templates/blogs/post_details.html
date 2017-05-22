@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 
+{% load cache %}
+
 {% load bootstrap3 %}
 {% bootstrap_javascript %}
 
@@ -35,7 +37,9 @@
              data-url="{% url 'blogs:like_post' pk=post.id %}" data-post-id="{{ post.id }}">
 
             {% bootstrap_icon 'heart' %}</a>
-          <span id="likes-{{ post.id }}">{{ post.likes.count }}</span>
+          <span id="likes-{{ post.id }}">
+            {% cache 5 'likescountcache' post.id %}{{ post.likes.count }} {% endcache %}
+          </span>
         </li>
 
       </ul>

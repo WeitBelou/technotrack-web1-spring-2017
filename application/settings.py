@@ -78,6 +78,14 @@ if DEBUG:
         'INTERCEPT_REDIRECTS': False,
     }
 
+# Memcache
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 ROOT_URLCONF = 'application.urls'
 
 TEMPLATES = [
