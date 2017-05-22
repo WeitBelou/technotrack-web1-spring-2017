@@ -54,6 +54,11 @@ class BlogDetails(DetailView):
     template_name = 'blogs/blog_details.html'
     model = Blog
 
+    def get_context_data(self, **kwargs):
+        context = super(BlogDetails, self).get_context_data(**kwargs)
+        context['posts'] = Post.objects.filter(blog=self.object).select_related('author', 'blog')
+        return context
+
 
 class PostDetails(CreateView):
     form_class = CreateCommentForm

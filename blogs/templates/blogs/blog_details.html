@@ -32,7 +32,7 @@
     <li class="list-group-item">
 
       <div class="panel-group">
-        {% for post in blog.posts.all %}
+        {% for post in posts %}
           <div class="panel panel-default">
               <div class="panel-heading">
                 {{ post.title }}
@@ -43,6 +43,13 @@
               </div>
 
               <div class="panel-footer">
+                <p>
+                  Автор: {{ post.author.username }}
+                </p>
+                <p>
+                  Блог: {{ post.blog.title }}
+                </p>
+
                 <a class="btn btn-info" href="{% url 'blogs:post_details' pk=post.id %}">
                   Смотреть
                 </a>
