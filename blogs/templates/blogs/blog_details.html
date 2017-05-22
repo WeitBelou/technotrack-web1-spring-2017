@@ -44,10 +44,7 @@
 
               <div class="panel-footer">
                 <p>
-                  Автор: {{ post.author.username }}
-                </p>
-                <p>
-                  Блог: {{ post.blog.title }}
+                  Автор: {{ post.author.username }} Лайков: {{ post.n_likes }}
                 </p>
 
                 <a class="btn btn-info" href="{% url 'blogs:post_details' pk=post.id %}">

@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db import models
+from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views import View
@@ -59,7 +60,7 @@ class BlogDetails(DetailView):
         context['posts'] = Post.objects.filter(
             models.Q(blog=self.object)
             & (models.Q(author=self.request.user.id)
-            | models.Q(is_published=True)))
+            | models.Q(is_published=True))).annotate(n_likes=Count('likes'))
         return context
 
 
