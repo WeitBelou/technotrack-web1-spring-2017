@@ -1,0 +1,2 @@
+gunicorn-1: gunicorn -c ../conf/gunicorn-1.conf application.wsgi
+gunicorn-2: gunicorn -c ../conf/gunicorn-2.conf application.wsgi
