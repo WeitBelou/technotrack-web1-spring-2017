@@ -16,11 +16,12 @@ class FilterForm(forms.Form):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('blog', 'title', 'content',)
+        fields = ('blog', 'title', 'content', 'is_published')
         labels = {
             'blog': 'Блог',
             'title': 'Заголовок',
-            'content': 'Текст поста'
+            'content': 'Текст поста',
+            'is_published': 'Опубликованный',
         }
 
     def __init__(self, *args, **kwargs):
@@ -32,10 +33,11 @@ class CreatePostForm(forms.ModelForm):
 class UpdatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'content')
+        fields = ('title', 'content', 'is_published')
         labels = {
             'title': 'Заголовок поста',
-            'content': 'Текст поста'
+            'content': 'Текст поста',
+            'is_published': 'Опубликованный',
         }
 
 

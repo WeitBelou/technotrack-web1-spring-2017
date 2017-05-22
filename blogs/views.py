@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db import models
 from django.http import JsonResponse
 from django.shortcuts import resolve_url, get_object_or_404
 from django.views import View
@@ -55,7 +56,10 @@ class BlogDetails(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogDetails, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter(blog=self.object).optimized()
+        context['posts'] = Post.objects.filter(
+            models.Q(blog=self.object)
+            & (models.Q(author=self.request.user.id)
+            | models.Q(is_published=True)))
         return context
 
 

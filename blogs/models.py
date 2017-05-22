@@ -21,7 +21,6 @@ class BlogQuerySet(models.QuerySet):
 
     def optimized(self):
         qs = self.select_related('owner')
-        qs = qs.select_related('blog')
         qs = qs.prefetch_related('categories')
         return qs
 
